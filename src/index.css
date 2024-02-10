@@ -1,0 +1,89 @@
+*{
+  /* margin:0;
+  padding:0; */
+  box-sizing: border-box;
+  text-decoration: none;
+}
+.container{
+  display:flex;
+  margin: 0;
+  padding: 0;
+}
+main{
+  width: 100%;
+  padding: 20px;
+}
+.sidebar{
+  background: #000;
+  color: #fff;
+  height: 102vh;
+  width: 200px;
+  transition: all 0.5s;
+}
+.top_section{
+  display: flex;
+  align-items:center;
+  padding:20px 15px;
+}
+.logo{
+  font-size: 30px;
+}
+.bars{
+  display: flex;
+  font-size: 25px;
+  margin-left: 50px;
+}
+.link{
+  display: flex;
+  color: #fff;
+  padding: 10px 15px;
+  gap: 15px;
+  transition: all 0.5s;
+  text-decoration: none;
+}
+.link:hover{
+  background:lightskyblue;
+  color: #000;
+  transition: all 0.5s;
+}
+.active{
+  background: lightskyblue;
+  color: #000;
+}
+.icon, .link_text{
+  font-size: 20px;
+}
+
+table{
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 90%;
+  border: 1px solid #ddd;
+}
+
+thead{
+  background-color: #333;
+  color: #fff;
+}
+
+th, td{
+  text-align: center;
+  padding-top: 16px;
+  padding-left: 6px;
+  padding-bottom: 16px;
+}
+
+tr:nth-child(even){
+  background-color: #f2f2f2;
+}
+.btn-user{
+  /* border-radius: 60px; */
+  color: #f2f2f2;
+  /* background-color: gray;  */
+  font-size: 26px;;
+}
+input{
+  padding: 3px;
+  width: 220px;
+  border-radius: 10px;
+}
