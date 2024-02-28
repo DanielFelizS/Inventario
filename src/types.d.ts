@@ -3,7 +3,11 @@ export type btnProps = {
     btnlabel: any,
     btncolor: string
 }
-
+export type SelectDepartamento = {
+    DepartamentoChange: (e: React.ChangeEvent<HTMLSelectElement>) => void
+    ValueID: number
+    Departamento: any[]
+}
 export interface NavegarProps {
     Navegar: ()=> void
 }
@@ -58,6 +62,7 @@ export type InputTextProps = {
 export type ParagraphProps = {
     TextParagraph: string,
     ValueParagraph: Array;
+    APIUrl: string
 }
 
 export type LoginData = {
@@ -71,7 +76,7 @@ export type PaginationProps = {
     ActionPage: (data: { selected: number }) => void;
 }
 
-export interface FormAddState {
+export interface DevicesAddState {
     nombreEquipo: string
     marca: string
     modelo: string
@@ -79,12 +84,13 @@ export interface FormAddState {
     inventario: string
     bienesNacionales: number
     propietario: string
+    departamentoId: any
     estado: string
     fecha: string
     data: Array< ()=> void >
 }
 
-export interface FormEditState {
+export interface DevicesEditState {
     id: string
     nombre_equipo: string
     marca: string
@@ -93,12 +99,23 @@ export interface FormEditState {
     cod_inventario: string
     bienes_nacionales: number
     propietario_equipo: string
+    departamentoId: any
     estado: string
     fecha_modificacion: string
 }
 
-export interface Devices extends FormEditState{
-    original: any;
-    actions: any;
+export interface DepartamentAddState{
+    nombre: string
+    descripción: string
+    fecha_creacion: string
+    encargado: string
+    departamentoData: Array< ()=> void >
 }
 
+export interface DepartamentEditState{
+    id: string
+    nombre: string
+    descripción: string
+    fecha_creacion: string
+    encargado: string
+}

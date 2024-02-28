@@ -1,4 +1,4 @@
-import api from "../axiosData.mjs";
+import api from "./../axiosData.mjs";
 
 export const LoginAction = async (credentials: any) => {
   try {
