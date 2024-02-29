@@ -35,7 +35,7 @@ export const DepartmentAdd = ({ Navegar }: NavegarProps) => {
 
   const navigate = useNavigate();
   const handleNavigate = () => {
-    navigate("/Inicio");
+    navigate("/Departamentos");
   };
 
 

@@ -38,25 +38,25 @@ export const SidebarData = [
 
     subNav: [
       {
-        path: "/Agregar",
+        path: "/AgregarDispositivo",
         title: "Agregar",
         icon: <TbDeviceDesktopPlus />,
         cName: "sub-nav",
       },
       {
-        path: "/Editar",
+        path: "/EditarDispositivo",
         title: "Editar",
         icon: <FaEdit />,
         cName: "sub-nav",
       },
       {
-        path: "/Consultar",
-        title: "Consultar",
+        path: "/VerDispositivo",
+        title: "Ver",
         icon: <IoEyeSharp />,
         cName: "sub-nav",
       },
       {
-        path: "/Eliminar",
+        path: "/EliminarDispositivo",
         title: "Eliminar",
         icon: <RiDeleteBin6Line />,
         cName: "sub-nav",
@@ -99,32 +99,32 @@ export const SidebarData = [
   },
   {
     title: "CPU",
-    path: "/cpu",
+    path: "/Computer",
     icon: <MdComputer/>,
     iconClosed: <RiIcons.RiArrowDownSFill />,
     iconOpened: <RiIcons.RiArrowUpSFill />,
 
     subNav: [
       {
-        path: "/Agregar",
+        path: "/AgregarPc",
         title: "Agregar",
         icon: <TbDeviceDesktopPlus />,
         cName: "sub-nav",
       },
       {
-        path: "/Editar",
+        path: "/EditarPc",
         title: "Editar",
         icon: <FaEdit />,
         cName: "sub-nav",
       },
       {
-        path: "/Consultar",
-        title: "Consultar",
+        path: "/VerPc",
+        title: "Ver",
         icon: <IoEyeSharp />,
         cName: "sub-nav",
       },
       {
-        path: "/Eliminar",
+        path: "/EliminarPc",
         title: "Eliminar",
         icon: <RiDeleteBin6Line />,
         cName: "sub-nav",

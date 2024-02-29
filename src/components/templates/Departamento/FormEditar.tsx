@@ -52,7 +52,7 @@ export const DepartmentEdit = ({ btnCerrar }: CerrarProps) => {
       // console.log(response.data);
       alert(response.data);
       btnCerrar();
-      navigate("/Inicio");
+      navigate("/Departamentos");
     } catch (error) {
       alert(error);
       setError("Ocurrió un error al editar el dispositivo");

@@ -68,7 +68,7 @@ export const DevicesAdd = ({ Navegar }: NavegarProps) => {
 
   const navigate = useNavigate();
   const handleNavigate = () => {
-    navigate("/Inicio");
+    navigate("/Dispositivo");
   };
 
   // Función para manejar cuando el usuario selecciona un departamento

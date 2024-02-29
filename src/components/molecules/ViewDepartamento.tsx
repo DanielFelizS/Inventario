@@ -10,7 +10,7 @@ export const ViewDepartamento = ({ Navegar }: NavegarProps) => {
     <div className="modal show" style={{ display: "block", position: "initial" }}>
       <Modal.Dialog>
         <Modal.Header closeButton  onClick={Navegar}> 
-          <Modal.Title>Datos del equipo</Modal.Title>
+          <Modal.Title>Datos del departamento</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Paragraph TextParagraph='Id del departamento: ' ValueParagraph='id' APIUrl={'departamento'}/>

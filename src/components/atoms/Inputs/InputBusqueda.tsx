@@ -4,7 +4,7 @@ export const InputBusqueda = ({ EventSearch }: InputSearch) => {
   return (
     <input
       type="text"
-      placeholder="Nombre equipo o Propietario"
+      placeholder="Buscar"
       onChange={EventSearch}
     />
   );
