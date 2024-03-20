@@ -16,7 +16,7 @@ export const DeleteComputer = ({ Navegar, Delete }: DeleteModalProps) => {
        </Modal.Header>
        <Modal.Body>
         <Paragraph TextParagraph='Id del PC: ' ValueParagraph='id' APIUrl={'computer'}/>
-        <Paragraph TextParagraph='Id del Dispositivo: ' ValueParagraph='equipo_Id' APIUrl={'computer'}/>
+        <Paragraph TextParagraph='Equipo: ' ValueParagraph='nombre_equipo' APIUrl={'computer'}/>
         <Paragraph TextParagraph='Memoria Ram: ' ValueParagraph='ram' APIUrl={'computer'}/>
         <Paragraph TextParagraph='Disco Duro: ' ValueParagraph='disco_duro' APIUrl={'computer'}/>
         <Paragraph TextParagraph='Procesador:  ' ValueParagraph='procesador' APIUrl={'computer'}/>

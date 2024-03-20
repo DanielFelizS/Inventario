@@ -20,7 +20,6 @@ export const ComputerEdit = ({ btnCerrar }: CerrarProps) => {
     tipo_MotherBoard: ""
   });
   const [dispositivos, setDispositivos] = useState<any>([]);
-  // const [departamentoId, setDepartamentoId] = useState<ComputerEditState["departamentoId"]>();
   const [error, setError] = useState("");
 
 
@@ -75,7 +74,6 @@ export const ComputerEdit = ({ btnCerrar }: CerrarProps) => {
       }
 
       const response = await api.put(`/computer/${edit.id}`, edit);
-      // console.log(response.data);
       alert(response.data);
       btnCerrar();
       navigate("/Computer");
@@ -92,7 +90,6 @@ export const ComputerEdit = ({ btnCerrar }: CerrarProps) => {
             ...prevState,
             equipo_Id: id,
           }));
-          // setDepartamentoId(id);
         };
   return (
     <>
@@ -102,7 +99,9 @@ export const ComputerEdit = ({ btnCerrar }: CerrarProps) => {
           <br />
           <select value={edit.equipo_Id} onChange={handleDispositivoChange}>
             {dispositivos.map((dispositivo: any) => (
-                <option key={dispositivo.id} value={dispositivo.id}>{dispositivo.nombre_equipo}</option>
+                <option key={dispositivo.id} value={dispositivo.id}>
+                  {dispositivo.marca}, {dispositivo.serial_no}
+                </option>
             ))}
         </select>
 

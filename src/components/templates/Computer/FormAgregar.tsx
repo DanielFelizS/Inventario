@@ -81,7 +81,7 @@ export const ComputerAdd = ({ Navegar }: NavegarProps) => {
           <br />
           <select value={idEquipo} onChange={handleDispositivoChange}>
             {dispositivos.map((dispositivo: any) => (
-                <option key={dispositivo.id} value={dispositivo.id}>{dispositivo.nombre_equipo}</option>
+                <option key={dispositivo.id} value={dispositivo.id}>{dispositivo.marca}, {dispositivo.serial_no}</option>
             ))}
           </select>
           <br />

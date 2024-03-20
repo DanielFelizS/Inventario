@@ -1,38 +1,38 @@
 import { useState, useEffect } from "react";
 import api from "../../../axiosData.mts";
 
-export const TableHead = ({HeadPath}: {HeadPath: string} ) => {
-  const [data, setData] = useState<any>([])
-
-  const fetchData = async () => {
-    try {
-      const response = await api.get(`/${HeadPath}`);
-      if (Array.isArray(response.data.items)) {
-        setData(Object.keys(response.data.items[0]));
-      } else {
-        console.error('Data is not an array:', response.data.items);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };  
+export const TableHead = ({ HeadPath }: { HeadPath: string }) => {
+  const [columns, setColumns] = useState<string[]>([]);
 
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await api.get(`/${HeadPath}`);
+        if (response.data && Array.isArray(response.data.items)) {
+          // Extract column names from the first item in the response
+          const firstItem = response.data.items[0];
+          const columnNames = Object.keys(firstItem);
+          setColumns(columnNames);
+        } else {
+          console.error("Data is not in the expected format:", response.data);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
     fetchData();
-  }, []);
+  }, [HeadPath]);
 
   return (
-    <>
-      <thead>
-        <tr>
-          {data.map((column: any, id: number)=> {
-            return <th key={id}>{column}</th>
-          })}
-          <th>Acciones</th>
-        </tr>
-        
-      </thead>
-    </>
+    <thead>
+      <tr>
+        {columns.map((column, index) => (
+          <th key={index}>{column}</th>
+        ))}
+        <th>Acciones</th>
+      </tr>
+    </thead>
   );
 };
 

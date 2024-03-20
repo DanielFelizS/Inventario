@@ -59,6 +59,8 @@ table{
   border-spacing: 0;
   width: 90%;
   border: 1px solid #ddd;
+  margin: 0 auto;
+  margin-top: 10px;
 }
 
 thead{
@@ -86,4 +88,62 @@ input{
   padding: 3px;
   width: 220px;
   border-radius: 10px;
+  /* text-align: center; */
+}
+.login {
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+  display: block;
+  position: absolute;
+  width: 60%;
+  left: 20%;
+  top: 60px;
+}
+
+.Login-Form{
+  height: 300px;
+}
+
+.Login-Cont{
+  width: 60%;
+  height: 300px;
+}
+
+.Btn-Login > button{
+  margin-top: 200px;
+  width: 65%;
+  height: 45px;
+}
+
+.Btn-Login{
+  margin-top: 30px;
+}
+
+#Titulo-Login{
+  font-size: 30px;
+  margin: 28px auto 30px 26px;
+  font-weight: 700;
+}
+
+.Login-Form > input{
+  width: 95%;
+  margin-left: 2.5%;
+}
+
+.Login-Form > label{
+  width: 95%;
+  margin-left: 2.5%;
+}
+
+.Login-Form input{
+  margin-bottom: 14px;
+}
+.btn-Agregar{
+  width: 120%;
+  /* background-color: red; */
+}
+
+.btn-Agregar input{
+  margin: auto 50% auto 20px;
 }

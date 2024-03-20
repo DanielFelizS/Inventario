@@ -25,7 +25,30 @@ export type btnDescargarProps = {
 }
 
 export type InputSearch = {
+    SearchValue: string;
     EventSearch: (e: ChangeEvent<HTMLInputElement>) => void;
+};
+
+export interface PropsTable {
+    searchData: string;
+    APIPath: string;
+    APINames: string[]
+    EditarDatos: string
+    VerDatos: string
+    EliminarDatos: string
+}
+
+export type DataType = {
+    [key: string]: any;
+};
+
+export type SearchProps = {
+    // DataFilter: T[];
+    search: string;
+    columnNames: string[];
+    EditarPath: string;
+    VerPath: string;
+    EliminarPath: string;
 };
 
 export type InputDobleProps = {
@@ -60,15 +83,14 @@ export type InputTextProps = {
 }
 
 export type ParagraphProps = {
-    TextParagraph: string,
+    TextParagraph: string;
     ValueParagraph: Array;
     APIUrl: string
 }
 
 export type LoginData = {
-    username: string,
-    password: string,
-    userRol: string,
+    userName: string;
+    password: string;
 }
 
 export type PaginationProps = {

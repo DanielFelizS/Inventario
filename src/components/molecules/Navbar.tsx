@@ -1,45 +1,39 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
-import { FaBars, FaUserCircle, FaEdit } from "react-icons/fa";
-import { IoHome } from "react-icons/io5";
+import { FaBars, FaUserCircle } from "react-icons/fa";
+// import { IoHome } from "react-icons/io5";
 import { NavLink } from "react-router-dom";
-import { RiDeleteBin6Line } from "react-icons/ri";
-import { IoEyeSharp } from "react-icons/io5";
-import { TbDeviceDesktopPlus } from "react-icons/tb";
+import { TbDevicesPc } from "react-icons/tb";
+import { MdApartment, MdComputer } from "react-icons/md"
 
 export const Sidebar = ({ children }: any) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
   const menuItem = [
+    // {
+    //   path: "/Inicio",
+    //   name: "Inicio",
+    //   icon: <IoHome />,
+    // },
     {
-      path: "/Login",
+      path: "/Dispositivo",
+      name: "Dispositivo",
+      icon: <TbDevicesPc />,
+    },
+    {
+      path: "/Departamentos",
+      name: "Departamento",
+      icon: <MdApartment />,
+    },
+    {
+      path: "/Computer",
+      name: "Computer",
+      icon: <MdComputer />,
+    },
+    {
+      path: "/Usuarios",
       name: "Usuario",
       icon: <FaUserCircle />,
-    },
-    {
-      path: "/Inicio",
-      name: "Inicio",
-      icon: <IoHome />,
-    },
-    {
-      path: "/Agregar",
-      name: "Agregar",
-      icon: <TbDeviceDesktopPlus />,
-    },
-    {
-      path: "/Editar",
-      name: "Editar",
-      icon: <FaEdit />,
-    },
-    {
-      path: "/Consultar",
-      name: "Consultar",
-      icon: <IoEyeSharp />,
-    },
-    {
-      path: "/Eliminar",
-      name: "Eliminar",
-      icon: <RiDeleteBin6Line />,
     }
   ];
   return (

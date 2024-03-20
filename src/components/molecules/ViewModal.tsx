@@ -18,12 +18,12 @@ export const ViewModal = ({ Navegar }: NavegarProps) => {
           <Paragraph TextParagraph='Marca: ' ValueParagraph='marca' APIUrl={'dispositivos'}/>
           <Paragraph TextParagraph='Modelo: ' ValueParagraph='modelo' APIUrl={'dispositivos'}/>
           <Paragraph TextParagraph='Número de serie (Service Tag): ' ValueParagraph='serial_no' APIUrl={'dispositivos'}/>
-          <Paragraph TextParagraph='Inventario: ' ValueParagraph='cod_inventario' APIUrl={'dispositivos'}/>
-          <Paragraph TextParagraph='Bienes Nacionales: ' ValueParagraph='bienes_nacionales' APIUrl={'dispositivos'}/>
+          <Paragraph TextParagraph='Invi: ' ValueParagraph='cod_inventario' APIUrl={'dispositivos'}/>
+          <Paragraph TextParagraph='Bienes nacionales: ' ValueParagraph='bienes_nacionales' APIUrl={'dispositivos'}/>
           <Paragraph TextParagraph='Estado del equipo: ' ValueParagraph='estado' APIUrl={'dispositivos'}/>
           <Paragraph TextParagraph='Propietario del equipo: ' ValueParagraph='propietario_equipo' APIUrl={'dispositivos'}/>
           <Paragraph TextParagraph='Fecha de modificación: ' ValueParagraph='fecha_modificacion' APIUrl={'dispositivos'}/>
-          <Paragraph TextParagraph='Departamento: ' ValueParagraph='departamentoId' APIUrl={'dispositivos'}/>
+          <Paragraph TextParagraph='Departamento: ' ValueParagraph='nombre_departamento' APIUrl={'dispositivos'}/>
       </Modal.Body>
       <Modal.Footer>
         <BtnAction btncolor="danger" action={Navegar} btnlabel="Cerrar"/>

@@ -2,11 +2,7 @@ import axios from 'axios';
 
 const api = axios.create({
     baseURL: "http://localhost:5198/api",
-    withCredentials: false,
-  //   headers: {
-  //     'Access-Control-Allow-Origin' : '*',
-  //     'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS'
-  // }
+    withCredentials: false
 })
 
 api.interceptors.request.use((config) => {
@@ -15,6 +11,16 @@ api.interceptors.request.use((config) => {
     config.headers.Authorization = `Bearer ${token}`;
   }
   return config;
+
 });
+
+// api.interceptors.response.use(response => response, async error => {
+//   const originalRequest = error.config;
+//   if (error.response.status === 401 && !originalRequest._retry) {
+//       originalRequest._retry = true;
+//       // Renovar el token JWT aquí
+//   }
+//   return Promise.reject(error);
+// });
 
 export default api;

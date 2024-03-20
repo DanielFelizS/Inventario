@@ -1,4 +1,4 @@
-import BtnAction from "../Buttons/Button";
+import BtnAction from "../../atoms/Buttons/Button";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { FaEye } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";

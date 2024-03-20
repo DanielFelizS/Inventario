@@ -1,17 +1,14 @@
 import { useState } from "react";
 import FormInput from "../atoms/Inputs/InputText";
 import BtnAction from "../atoms/Buttons/Button";
-import SelectForm from "../atoms/Inputs/InputEstado";
-import { Form } from "react-bootstrap";
+import { Form, Modal } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { LoginAction } from "../LoginAction";
 import { LoginData } from "../../types";
 
 export const Login = () => {
-  const [username, setUsername] = useState<LoginData["username"]>("");
+  const [username, setUsername] = useState<LoginData["userName"]>("");
   const [password, setPassword] = useState<LoginData["password"]>("");
-  const [userRol, setUserRol] = useState<LoginData["userRol"]>("");
-  // eslint-disable-next-line no-unused-vars
   const [user, setUser] = useState("");
 
   const navigate = useNavigate();
@@ -20,18 +17,17 @@ export const Login = () => {
     try {
       const response = await LoginAction({
         username,
-        password,
-        userRol,
+        password
       });
+      const token = response.message;
 
-      if (response && response.token) {
-        localStorage.setItem("token", response.token);
-        console.log(response);
+      if (response && token) {
+        localStorage.setItem("token", token);
+        // console.log(response);
         setUser(response.username);
         setUsername("");
         setPassword("");
-        setUserRol("");
-        navigate("/Inicio");
+        navigate("/Dispositivo");
       } else {
         alert("Error: No se recibió el token JWT en la respuesta");
       }
@@ -41,11 +37,16 @@ export const Login = () => {
   };
 
   return (
-    <Form>
+    
+    <div className="modal show login">
+    <Modal.Dialog className="Login-Cont">
+    <h1 id="Titulo-Login">Iniciar Sesión</h1>
+      <Modal.Body id="Modal-Body">
+    <Form className="Login-Form">
       <FormInput
         InputTitle="Nombre de usuario"
         InputType="text"
-        InputName="username"
+        InputName="userName"
         Inputvalue={username}
         InputChange={(e) => setUsername(e.target.value)}
       />
@@ -56,21 +57,19 @@ export const Login = () => {
         Inputvalue={password}
         InputChange={(e) => setPassword(e.target.value)}
       />
-      <SelectForm
-        Inputvalue={userRol}
-        InputChange={(e) => setUserRol(e.target.value)}
-        InputName='Rol'
-        Select1='admin'
-        Select2='Soporte técnico'
-        Select3='Lector'
-      />
       <br />
+      <div style={{textAlign: "center"}} className="Btn-Login">
       <BtnAction
         btnlabel="Iniciar Sesión"
-        btncolor="primary"
+        btncolor="success"
         action={handleLogin}
       />
+      </div>
     </Form>
+    </Modal.Body>
+
+    </Modal.Dialog>
+  </div>
   );
 };
 

@@ -136,9 +136,10 @@ export const DevicesAdd = ({ Navegar }: NavegarProps) => {
           <br />
           <select value={departamentoId} onChange={handleDepartamentoChange}>
             {departamentos.map((departamento: any) => (
-                <option key={departamento.id} value={departamento.id}>{departamento.nombre}</option>
+              <option key={departamento.id} value={departamento.id}>{departamento.nombre}</option>
             ))}
-        </select>
+          </select>
+
           <br />
           <SelectForm
             Inputvalue={estado}

@@ -23,7 +23,6 @@ export const DevicesEdit = ({ btnCerrar }: CerrarProps) => {
     fecha_modificacion: "",
   });
   const [departamentos, setDepartamentos] = useState<any>([]);
-  // const [departamentoId, setDepartamentoId] = useState<DevicesEditState["departamentoId"]>();
   const [error, setError] = useState("");
 
 
@@ -43,7 +42,6 @@ export const DevicesEdit = ({ btnCerrar }: CerrarProps) => {
       console.error(error);
     }
   };
-
 
   const { id } = useParams();
 
@@ -78,7 +76,6 @@ export const DevicesEdit = ({ btnCerrar }: CerrarProps) => {
       }
 
       const response = await api.put(`/dispositivos/${edit.id}`, edit);
-      // console.log(response.data);
       alert(response.data);
       btnCerrar();
       navigate("/Dispositivo");
@@ -95,7 +92,6 @@ export const DevicesEdit = ({ btnCerrar }: CerrarProps) => {
             ...prevState,
             departamentoId: id,
           }));
-          // setDepartamentoId(id);
         };
   return (
     <>
@@ -161,8 +157,7 @@ export const DevicesEdit = ({ btnCerrar }: CerrarProps) => {
               <option key={departamento.id} value={departamento.id}
               // selected={departamento.id === edit.departamentoId}
               >
-                {departamento.nombre}
-              </option>
+                {departamento.nombre}</option>
             ))}
           </select>
           <br />

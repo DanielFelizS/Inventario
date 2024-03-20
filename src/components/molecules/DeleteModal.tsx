@@ -25,7 +25,7 @@ export const DeleteModal = ({ Navegar, Delete }: DeleteModalProps) => {
         <Paragraph TextParagraph='Estado del equipo: ' ValueParagraph='estado' APIUrl={'dispositivos'}/>
         <Paragraph TextParagraph='Propietario del equipo: ' ValueParagraph='propietario_equipo' APIUrl={'dispositivos'}/>
         <Paragraph TextParagraph='Fecha de modificación: ' ValueParagraph='fecha_modificacion' APIUrl={'dispositivos'}/>
-        <Paragraph TextParagraph='Departamento: ' ValueParagraph='departamentoId' APIUrl={'dispositivos'}/>
+        <Paragraph TextParagraph='Departamento: ' ValueParagraph='nombre_departamento' APIUrl={'dispositivos'}/>
        </Modal.Body>
        <Modal.Footer>
         <BtnAction btncolor="primary" action={Navegar} btnlabel="Cerrar"/>
