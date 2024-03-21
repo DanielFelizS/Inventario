@@ -27,11 +27,11 @@ export const ComputerAdd = ({ Navegar }: NavegarProps) => {
 
   const obtenerDatos = async () => {
     try {
-      const response = await api.get(`/dispositivos`);
-      if (Array.isArray(response.data.items)) {
-        setDispositivos(response.data.items);
+      const response = await api.get(`/dispositivos/all`);
+      if (Array.isArray(response.data)) {
+        setDispositivos(response.data);
       } else {
-        console.error('Error: la respuesta de la API no contiene un array en la propiedad items', response.data);
+        console.error('Error: la respuesta de la API no contiene un array', response.data);
       }
     } catch (error) {
       console.error(error);
@@ -74,23 +74,27 @@ export const ComputerAdd = ({ Navegar }: NavegarProps) => {
 
   return (
     <>
-      <Form>
+      <Form className="FormData">
         <Form.Group className="mb-3" controlId="">
 
           <label>Equipo</label>
           <br />
-          <select value={idEquipo} onChange={handleDispositivoChange}>
-            {dispositivos.map((dispositivo: any) => (
-                <option key={dispositivo.id} value={dispositivo.id}>{dispositivo.marca}, {dispositivo.serial_no}</option>
-            ))}
+          <select value={idEquipo} onChange={handleDispositivoChange} className="SelectData">
+            <option disabled>ID, Modelo, Serial no.</option>
+            {dispositivos.map((dispositivo: any) => {
+              if (dispositivo.nombre_equipo === "CPU" || dispositivo.nombre_equipo === "Laptop") {
+                return <option key={dispositivo.id} value={dispositivo.id}>{dispositivo.id}, {dispositivo.modelo}, {dispositivo.serial_no}</option>;
+              }
+            })}
           </select>
+
           <br />
           <InputDoble
             InputName="RAM y Disco duro"
             FirstValue={ram}
             FirstChange={(e) => setRam(e.target.value)}
             FirstType="text"
-            FirstPlaceholder="4 GB"
+            FirstPlaceholder="32 GB"
             FirstName="ram"
             SecondValue={discoDuro}
             SecondChange={(e) => setDiscoDuro(e.target.value)}
@@ -137,9 +141,10 @@ export const ComputerAdd = ({ Navegar }: NavegarProps) => {
             SecondName="tipo_MotherBoard"
           />
         </Form.Group>
+      <BtnAction btnlabel="Cancelar" btncolor="danger" action={Navegar} />
+      <BtnAction btnlabel="Guardar" btncolor="success" action={agregarDatos} />
       </Form>
-      <BtnAction btnlabel="Cancelar" btncolor="secondary" action={Navegar} />
-      <BtnAction btnlabel="Guardar" btncolor="primary" action={agregarDatos} />
+
     </>
   );
 };

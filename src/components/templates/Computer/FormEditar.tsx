@@ -21,7 +21,8 @@ export const ComputerEdit = ({ btnCerrar }: CerrarProps) => {
   });
   const [dispositivos, setDispositivos] = useState<any>([]);
   const [error, setError] = useState("");
-
+  const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     ObtenerDepartameto();
@@ -29,9 +30,9 @@ export const ComputerEdit = ({ btnCerrar }: CerrarProps) => {
 
   const ObtenerDepartameto = async () => {
     try {
-      const request = await api.get(`/dispositivos`);
-      if (Array.isArray(request.data.items)) {
-        setDispositivos(request.data.items);
+      const request = await api.get(`/dispositivos/all`);
+      if (Array.isArray(request.data)) {
+        setDispositivos(request.data);
       } else {
         console.error(error);
       }
@@ -39,11 +40,6 @@ export const ComputerEdit = ({ btnCerrar }: CerrarProps) => {
       console.error(error);
     }
   };
-
-
-  const { id } = useParams();
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     obtenerDatos();
@@ -93,24 +89,25 @@ export const ComputerEdit = ({ btnCerrar }: CerrarProps) => {
         };
   return (
     <>
-      <Form>
+      <Form className="FormData">
         <Form.Group className="mb-3" controlId="">
         <label>Equipo</label>
           <br />
-          <select value={edit.equipo_Id} onChange={handleDispositivoChange}>
-            {dispositivos.map((dispositivo: any) => (
-                <option key={dispositivo.id} value={dispositivo.id}>
-                  {dispositivo.marca}, {dispositivo.serial_no}
-                </option>
-            ))}
-        </select>
+          <select value={edit.equipo_Id} onChange={handleDispositivoChange} className="SelectData">
+            <option disabled>ID, Modelo, Serial no.</option>
+            {dispositivos.map((dispositivo: any) => {
+              if (dispositivo.nombre_equipo === "CPU" || dispositivo.nombre_equipo === "Laptop") {
+                return <option key={dispositivo.id} value={dispositivo.id}>{dispositivo.id}, {dispositivo.modelo}, {dispositivo.serial_no}</option>;
+              }
+            })}
+          </select>
 
           <InputDoble
             InputName="RAM y Disco duro"
             FirstValue={edit.ram}
             FirstChange={handleInputChange}
             FirstType="text"
-            FirstPlaceholder="4 GB"
+            FirstPlaceholder="32 GB"
             FirstName="ram"
             SecondValue={edit.disco_duro}
             SecondChange={handleInputChange}

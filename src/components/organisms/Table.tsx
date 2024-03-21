@@ -5,7 +5,7 @@ import Search from "../molecules/Search.js";
 import TableHead from "../atoms/table/TableHead.js";
 import { PropsTable } from "../../types.js";
 
-export const Table = ({ APIPath, APINames, EditarDatos, VerDatos, EliminarDatos, searchData }: PropsTable) => {
+export const Table = ({ APIPath, APINames, EditarDatos, EliminarDatos, searchData, Header }: PropsTable) => {
 
   const [data, setData] = useState([]);
   const [load, setLoad] = useState(false);
@@ -31,8 +31,8 @@ export const Table = ({ APIPath, APINames, EditarDatos, VerDatos, EliminarDatos,
 
   useEffect(() => {
     fetchData();
-  }, [currentPage, searchData]); // Actualizar datos cuando cambie la página o el término de búsqueda
-
+  }, [currentPage, searchData]); 
+  
   const handlePageClick = (data: { selected: number }) => {
     setCurrentPage(data.selected + 1);
   };
@@ -42,11 +42,10 @@ export const Table = ({ APIPath, APINames, EditarDatos, VerDatos, EliminarDatos,
     <>
       {load ? (
         <>
-          {/* <input type="text" value={search} onChange={handleSearchChange} /> */}
-          <table style={{ textAlign: "center" }}>
-            <TableHead HeadPath={APIPath}/>
-            {/* Pasar el término de búsqueda y el método de cambio al componente Search */}
-            <Search DataFilter={data} search={searchData} columnNames={APINames} EditarPath={EditarDatos} VerPath={VerDatos} EliminarPath={EliminarDatos}/>
+          <table>
+            <TableHead HeadPath={Header}/>
+
+            <Search DataFilter={data} search={searchData} columnNames={APINames} EditarPath={EditarDatos} EliminarPath={EliminarDatos}/>
           </table>
         </>
       ) : (

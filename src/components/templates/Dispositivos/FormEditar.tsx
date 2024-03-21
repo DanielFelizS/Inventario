@@ -32,9 +32,9 @@ export const DevicesEdit = ({ btnCerrar }: CerrarProps) => {
 
   const ObtenerDepartameto = async () => {
     try {
-      const request = await api.get(`/departamento`);
-      if (Array.isArray(request.data.items)) {
-        setDepartamentos(request.data.items);
+      const request = await api.get(`/departamento/all`);
+      if (Array.isArray(request.data)) {
+        setDepartamentos(request.data);
       } else {
         console.error(error);
       }
@@ -95,7 +95,7 @@ export const DevicesEdit = ({ btnCerrar }: CerrarProps) => {
         };
   return (
     <>
-      <Form>
+      <Form className="FormData">
         <Form.Group className="mb-3" controlId="">
           <FormInput
             InputTitle="Nombre del equipo"
@@ -152,7 +152,8 @@ export const DevicesEdit = ({ btnCerrar }: CerrarProps) => {
           <br />
           <label>Departamento</label>
           <br />
-          <select value={edit.departamentoId} onChange={handleDepartamentoChange}>
+          <select value={edit.departamentoId} onChange={handleDepartamentoChange} className="SelectData">
+            <option disabled>Nombre del departamento</option>
             {departamentos.map((departamento: any) => (
               <option key={departamento.id} value={departamento.id}
               // selected={departamento.id === edit.departamentoId}
@@ -182,12 +183,12 @@ export const DevicesEdit = ({ btnCerrar }: CerrarProps) => {
           <br />
           <BtnAction
             btnlabel="Cancelar"
-            btncolor="secondary"
+            btncolor="danger"
             action={btnCerrar}
           />
           <BtnAction
             btnlabel="Guardar"
-            btncolor="primary"
+            btncolor="success"
             action={editarDatos}
           />
         </Form.Group>

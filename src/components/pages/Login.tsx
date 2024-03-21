@@ -2,7 +2,7 @@ import { useState } from "react";
 import FormInput from "../atoms/Inputs/InputText";
 import BtnAction from "../atoms/Buttons/Button";
 import { Form, Modal } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 import { LoginAction } from "../LoginAction";
 import { LoginData } from "../../types";
 
@@ -17,7 +17,7 @@ export const Login = () => {
     try {
       const response = await LoginAction({
         username,
-        password
+        password,
       });
       const token = response.message;
 
@@ -37,39 +37,38 @@ export const Login = () => {
   };
 
   return (
-    
     <div className="modal show login">
-    <Modal.Dialog className="Login-Cont">
-    <h1 id="Titulo-Login">Iniciar Sesión</h1>
-      <Modal.Body id="Modal-Body">
-    <Form className="Login-Form">
-      <FormInput
-        InputTitle="Nombre de usuario"
-        InputType="text"
-        InputName="userName"
-        Inputvalue={username}
-        InputChange={(e) => setUsername(e.target.value)}
-      />
-      <FormInput
-        InputTitle="Contraseña"
-        InputType="password"
-        InputName="password"
-        Inputvalue={password}
-        InputChange={(e) => setPassword(e.target.value)}
-      />
-      <br />
-      <div style={{textAlign: "center"}} className="Btn-Login">
-      <BtnAction
-        btnlabel="Iniciar Sesión"
-        btncolor="success"
-        action={handleLogin}
-      />
-      </div>
-    </Form>
-    </Modal.Body>
+      <Modal.Dialog className="Login-Cont">
+        <h1 id="Titulo-Login">Iniciar Sesión</h1>
 
-    </Modal.Dialog>
-  </div>
+        <Modal.Body>
+          <Form className="Login-Form">
+            <FormInput
+              InputTitle="Nombre de usuario"
+              InputType="text"
+              InputName="userName"
+              Inputvalue={username}
+              InputChange={(e) => setUsername(e.target.value)}
+            />
+            <FormInput
+              InputTitle="Contraseña"
+              InputType="password"
+              InputName="password"
+              Inputvalue={password}
+              InputChange={(e) => setPassword(e.target.value)}
+            />
+            <br />
+            <div style={{ textAlign: "center" }} className="Btn-Login">
+              <BtnAction
+                btnlabel="Iniciar Sesión"
+                btncolor="success"
+                action={handleLogin}
+              />
+            </div>
+          </Form>
+        </Modal.Body>
+      </Modal.Dialog>
+    </div>
   );
 };
 

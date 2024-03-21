@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import api from '../../axiosData.mts';
 import { saveAs } from 'file-saver';
 import { useState } from 'react';
-// import { useState } from 'react';
 import InputBusqueda from '../atoms/Inputs/InputBusqueda';
+import Navigation from '../molecules/Navbar';
 
 export const HomeDispositivos = () => {
   const [search, setSearch] = useState('');
@@ -31,17 +31,20 @@ export const HomeDispositivos = () => {
   };
   const Datos = ['id', 'nombre_equipo', 'marca', 'modelo', 'estado', 'serial_no', 'cod_inventario', 'bienes_nacionales', 'fecha_modificacion', 'propietario_equipo', 'nombre_departamento'];
 
+  const Headers = ['ID', 'Equipo', 'Marca', 'Modelo', 'Estado', 'Serial no.', 'INVI', 'Bienes nacionales', 'Fecha de modificación', 'Propietario del equipo', 'Departamento'];
+
   return (
     <>
+      <Navigation/>
       <div className='btn-Agregar'>
 
       <InputBusqueda SearchValue={search} EventSearch={handleChangeSearch} />
 
-      <BtnAction btncolor='success' action={handleNavigate} btnlabel='AgregarDatos'/> 
+      <BtnAction btncolor='success' action={handleNavigate} btnlabel='Agregar equipo'/> 
       </div>
 
       <br />
-      <Table APIPath='dispositivos' APINames={Datos} VerDatos={'VerDispositivo'} EditarDatos={'EditarDispositivo'} EliminarDatos={'EliminarDispositivos'} searchData={search}/>
+      <Table APIPath='dispositivos' APINames={Datos} EditarDatos={'EditarDispositivo'} EliminarDatos={'EliminarDispositivos'} searchData={search} Header={Headers}/>
       <br/>
       <BtnAction btncolor='success' action={Reporte} btnlabel='Generar reporte'/>
     </>

@@ -11,19 +11,18 @@ import HomeUsuario from './components/pages/HomeUsuario';
 
 import AgregarDispositivo from './components/pages/AgregarDispositivo';
 import EditarDispositivo from './components/pages/EditarDispositivo';
-import VerDispositivo from './components/pages/VerDispositivo';
 import EliminarDispositvo from './components/pages/EliminarDispositvo';
 import AgregarDepartamento from './components/pages/AgregarDepartamento';
 import EditarDepartamento from './components/pages/EditarDepartamento';
-import VerDepartamento from './components/pages/VerDepartamento';
 import EliminarDepartamento from './components/pages/EliminarDepartamento';
 import AgregarComputer from './components/pages/AgregarPc';
 import EditarComputer from './components/pages/EditarPc';
-import VerComputer from './components/pages/VerPc';
 import EliminarComputer from './components/pages/EliminarPc';
-import Sidebar from './components/molecules/Navbar';
-// import Sidebar from './components/Sidebar';
+
+import EliminarUsuario from './components/pages/EliminarUsuario';
+import EditarUsuario from './components/pages/EditarUsuario';
 import { useLocalStorage } from 'react-use';
+import Navbar from './components/molecules/Navbar';
 
 export const App = () => {
   const [user, setUser] = useLocalStorage('token');
@@ -38,7 +37,6 @@ export const App = () => {
 
   return (
     <>
-      <Sidebar>
       <Routes>
       {/* <Route element={<ProtectedRoute canActivate={user} redirectPath='/Login' />}> */}
       <Route path="/Usuarios" element={<HomeUsuario />} />
@@ -58,26 +56,26 @@ export const App = () => {
         {/* Dispositivo */}
         <Route path="/AgregarDispositivo" element={<AgregarDispositivo />} />
         <Route path="/EditarDispositivo/:id" element={<EditarDispositivo />} />
-        <Route path="/VerDispositivo/:id" element={<VerDispositivo />} />
         <Route path="/EliminarDispositivos/:id" element={<EliminarDispositvo />} />
 
         {/* Departamento */}
         <Route path="/AgregarDepartamento" element={<AgregarDepartamento />} />
         <Route path="/EditarDepartamento/:id" element={<EditarDepartamento />} />
-        <Route path="/VerDepartamento/:id" element={<VerDepartamento />} />
         <Route path="/EliminarDepartamento/:id" element={<EliminarDepartamento />} />
 
         {/* Computer */}
         <Route path="/AgregarPc" element={<AgregarComputer />} />
         <Route path="/EditarPc/:id" element={<EditarComputer />} />
-        <Route path="/VerPc/:id" element={<VerComputer />} />
         <Route path="/EliminarPc/:id" element={<EliminarComputer />} />
 
+        <Route path="/EditarUsuario/:id" element={<EditarUsuario />} />
+        <Route path="/EliminarUsuario/:id" element={<EliminarUsuario />} />
+
+
         {/* Otros */}
-        <Route path="/" element={<Sidebar />} />
+        <Route path="/" element={<Navbar />} />
 
       </Routes>
-      </Sidebar>
     </>
   );
 };

@@ -10,15 +10,19 @@ import { useNavigate } from "react-router-dom";
 import { DevicesAddState, NavegarProps } from "../../../types.js";
 
 export const DevicesAdd = ({ Navegar }: NavegarProps) => {
-
-  const [nombreEquipo, setNombreEquipo] = useState<DevicesAddState["nombreEquipo"]>("");
+  const [nombreEquipo, setNombreEquipo] =
+    useState<DevicesAddState["nombreEquipo"]>("");
   const [marca, setMarca] = useState<DevicesAddState["marca"]>("");
   const [modelo, setModelo] = useState<DevicesAddState["modelo"]>("");
   const [noSerie, setNoSerie] = useState<DevicesAddState["noSerie"]>("");
-  const [inventario, setInventario] = useState<DevicesAddState["inventario"]>("");
-  const [bienesNacionales, setBienesNacionales] = useState<DevicesAddState["bienesNacionales"]>(0);
-  const [propietario, setPropietario] = useState<DevicesAddState["propietario"]>("");
-  const [departamentoId, setDepartamentoId] = useState<DevicesAddState["departamentoId"]>();
+  const [inventario, setInventario] =
+    useState<DevicesAddState["inventario"]>("");
+  const [bienesNacionales, setBienesNacionales] =
+    useState<DevicesAddState["bienesNacionales"]>(0);
+  const [propietario, setPropietario] =
+    useState<DevicesAddState["propietario"]>("");
+  const [departamentoId, setDepartamentoId] =
+    useState<DevicesAddState["departamentoId"]>();
   const [estado, setEstado] = useState<DevicesAddState["estado"]>("");
   const [fecha, setFecha] = useState<DevicesAddState["fecha"]>("");
   const [data, setData] = useState<DevicesAddState["data"]>([]);
@@ -30,11 +34,14 @@ export const DevicesAdd = ({ Navegar }: NavegarProps) => {
 
   const obtenerDatos = async () => {
     try {
-      const response = await api.get(`/departamento`);
-      if (Array.isArray(response.data.items)) {
-        setDepartamentos(response.data.items);
+      const response = await api.get(`/departamento/all`);
+      if (Array.isArray(response.data)) {
+        setDepartamentos(response.data);
       } else {
-        console.error('Error: la respuesta de la API no contiene un array en la propiedad items', response.data);
+        console.error(
+          "Error: la respuesta de la API no contiene un array",
+          response.data
+        );
       }
     } catch (error) {
       console.error(error);
@@ -52,7 +59,7 @@ export const DevicesAdd = ({ Navegar }: NavegarProps) => {
       propietario_equipo: propietario,
       estado: estado,
       fecha_modificacion: fecha,
-      departamentoId: departamentoId
+      departamentoId: departamentoId,
     };
 
     try {
@@ -63,8 +70,8 @@ export const DevicesAdd = ({ Navegar }: NavegarProps) => {
       handleNavigate();
     } catch (error) {
       console.error(error);
-  }
-}
+    }
+  };
 
   const navigate = useNavigate();
   const handleNavigate = () => {
@@ -72,14 +79,16 @@ export const DevicesAdd = ({ Navegar }: NavegarProps) => {
   };
 
   // Función para manejar cuando el usuario selecciona un departamento
-  const handleDepartamentoChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleDepartamentoChange = (
+    e: React.ChangeEvent<HTMLSelectElement>
+  ) => {
     const id = e.target.value;
     setDepartamentoId(id);
   };
 
   return (
     <>
-      <Form>
+      <Form className="FormData">
         <Form.Group className="mb-3" controlId="">
           <FormInput
             InputTitle="Nombre del equipo"
@@ -128,15 +137,18 @@ export const DevicesAdd = ({ Navegar }: NavegarProps) => {
             InputTitle="Propietario del equipo"
             InputType="text"
             InputName="propietario"
-            Inputvalue={propietario} 
+            Inputvalue={propietario}
             InputChange={(e) => setPropietario(e.target.value)}
           />
-          <br/>
+          <br />
           <label>Departamento</label>
           <br />
-          <select value={departamentoId} onChange={handleDepartamentoChange}>
+          <select value={departamentoId} onChange={handleDepartamentoChange} className="SelectData">
+            <option disabled>Nombre del departamento</option>
             {departamentos.map((departamento: any) => (
-              <option key={departamento.id} value={departamento.id}>{departamento.nombre}</option>
+              <option key={departamento.id} value={departamento.id}>
+                {departamento.nombre}
+              </option>
             ))}
           </select>
 
@@ -158,9 +170,9 @@ export const DevicesAdd = ({ Navegar }: NavegarProps) => {
             InputChange={(e) => setFecha(e.target.value.toString())}
           />
         </Form.Group>
+      <BtnAction btnlabel="Cancelar" btncolor="danger" action={Navegar} />
+      <BtnAction btnlabel="Guardar" btncolor="success" action={agregarDatos} />
       </Form>
-      <BtnAction btnlabel="Cancelar" btncolor="secondary" action={Navegar} />
-      <BtnAction btnlabel="Guardar" btncolor="primary" action={agregarDatos} />
     </>
   );
 };

@@ -10,7 +10,6 @@ export type SearchProps<T extends DataType> = {
   search: string;
   columnNames: string[];
   EditarPath: string;
-  VerPath: string;
   EliminarPath: string;
 };
 
@@ -19,11 +18,10 @@ const Search = <T extends DataType>({
   search,
   columnNames,
   EditarPath,
-  VerPath,
   EliminarPath,
 }: SearchProps<T>) => {
   return (
-    <tbody>
+    <>
       {DataFilter
         .filter((row: any) => {
           return (
@@ -50,13 +48,12 @@ const Search = <T extends DataType>({
               <TableButtons
                 DataNavigate={item}
                 EditarProp={EditarPath}
-                VerProp={VerPath}
                 EliminarProp={EliminarPath}
               />
             </td>
           </tr>
         ))}
-    </tbody>
+    </>
   );
 };
 

@@ -34,8 +34,8 @@ export interface PropsTable {
     APIPath: string;
     APINames: string[]
     EditarDatos: string
-    VerDatos: string
     EliminarDatos: string
+    Header: string[]
 }
 
 export type DataType = {
@@ -165,4 +165,12 @@ export interface ComputerEditState{
     motherBoard: string
     tipo_MotherBoard: string
     // ComputerData: Array< ()=> void >
+}
+
+export type UserEditState = {
+    id: string
+    firstName: string
+    lastName: string
+    userName: string
+    email: string
 }

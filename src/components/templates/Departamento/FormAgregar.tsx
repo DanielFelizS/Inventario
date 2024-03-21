@@ -8,11 +8,13 @@ import { useNavigate } from "react-router-dom";
 import { DepartamentAddState, NavegarProps } from "../../../types.js";
 
 export const DepartmentAdd = ({ Navegar }: NavegarProps) => {
-
-  const [nombreDepartamento, setNombreDepartamento] = useState<DepartamentAddState["nombre"]>("");
-  const [descripcion, setDescripcion] = useState<DepartamentAddState["descripción"]>("");
+  const [nombreDepartamento, setNombreDepartamento] =
+    useState<DepartamentAddState["nombre"]>("");
+  const [descripcion, setDescripcion] =
+    useState<DepartamentAddState["descripción"]>("");
   const [fecha, setFecha] = useState<DepartamentAddState["fecha_creacion"]>("");
-  const [encargado, setEncargado] = useState<DepartamentAddState["encargado"]>("");
+  const [encargado, setEncargado] =
+    useState<DepartamentAddState["encargado"]>("");
   const [data, setData] = useState<DepartamentAddState["departamentoData"]>([]);
 
   const agregarDatos = async () => {
@@ -20,7 +22,7 @@ export const DepartmentAdd = ({ Navegar }: NavegarProps) => {
       nombre: nombreDepartamento,
       descripción: descripcion,
       fecha_creacion: fecha,
-      encargado: encargado
+      encargado: encargado,
     };
 
     try {
@@ -30,18 +32,17 @@ export const DepartmentAdd = ({ Navegar }: NavegarProps) => {
       handleNavigate();
     } catch (error) {
       console.error(error);
-  }
-}
+    }
+  };
 
   const navigate = useNavigate();
   const handleNavigate = () => {
     navigate("/Departamentos");
   };
 
-
   return (
     <>
-      <Form>
+      <Form className="FormData">
         <Form.Group className="mb-3" controlId="">
           <FormInput
             InputTitle="Nombre del departamento"
@@ -55,7 +56,7 @@ export const DepartmentAdd = ({ Navegar }: NavegarProps) => {
             InputTitle="Descripción (Objetivo del departamento)"
             InputType="text"
             InputName="descripción"
-            Inputvalue={descripcion} 
+            Inputvalue={descripcion}
             InputChange={(e) => setDescripcion(e.target.value)}
           />
 
@@ -75,9 +76,13 @@ export const DepartmentAdd = ({ Navegar }: NavegarProps) => {
             InputChange={(e) => setFecha(e.target.value.toString())}
           />
         </Form.Group>
+        <BtnAction btnlabel="Cancelar" btncolor="danger" action={Navegar} />
+        <BtnAction
+          btnlabel="Guardar"
+          btncolor="success"
+          action={agregarDatos}
+        />
       </Form>
-      <BtnAction btnlabel="Cancelar" btncolor="secondary" action={Navegar} />
-      <BtnAction btnlabel="Guardar" btncolor="primary" action={agregarDatos} />
     </>
   );
 };

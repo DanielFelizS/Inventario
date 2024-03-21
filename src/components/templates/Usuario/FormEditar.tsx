@@ -4,15 +4,15 @@ import FormInput from "../../atoms/Inputs/InputText.jsx";
 import api from "../../../axiosData.mjs";
 import BtnAction from "../../atoms/Buttons/Button.js";
 import { useParams, useNavigate } from "react-router-dom";
-import { CerrarProps, DepartamentEditState } from "../../../types.js";
+import { CerrarProps, UserEditState } from "../../../types.js";
 
-export const DepartmentEdit = ({ btnCerrar }: CerrarProps) => {
-  const [edit, setEdit] = useState<DepartamentEditState>({
+export const UserEdit = ({ btnCerrar }: CerrarProps) => {
+  const [edit, setEdit] = useState<UserEditState>({
     id: "",
-    nombre: "",
-    descripción: "",
-    fecha_creacion: "",
-    encargado: ""
+    firstName: "",
+    lastName: "",
+    userName: "",
+    email: ""
   });
   const [error, setError] = useState("");
 
@@ -26,7 +26,7 @@ export const DepartmentEdit = ({ btnCerrar }: CerrarProps) => {
 
   const obtenerDatos = async () => {
     try {
-      const response = await api.get(`/departamento/${id}`);
+      const response = await api.get(`/usuarios/${id}`);
       setEdit(response.data);
     } catch (error) {
       console.error(error);
@@ -44,18 +44,18 @@ export const DepartmentEdit = ({ btnCerrar }: CerrarProps) => {
   const editarDatos = async () => {
     try {
       if (!edit.id) {
-        setError("El ID del dispositivo es requerido");
+        setError("El ID del usuario es requerido");
         alert(error);
       }
 
-      const response = await api.put(`/departamento/${edit.id}`, edit);
+      const response = await api.put(`/usuarios/${edit.id}`, edit);
       // console.log(response.data);
       alert(response.data);
       btnCerrar();
-      navigate("/Departamentos");
+      navigate("/Usuarios");
     } catch (error) {
       alert(error);
-      setError("Ocurrió un error al editar el dispositivo");
+      setError("Ocurrió un error al editar el usuario");
     }
   };
 
@@ -64,34 +64,33 @@ export const DepartmentEdit = ({ btnCerrar }: CerrarProps) => {
       <Form className="FormData">
         <Form.Group className="mb-3" controlId="">
           <FormInput
-            InputTitle="Nombre del departamento"
+            InputTitle="Nombre"
             InputType="text"
-            InputName="nombre"
-            Inputvalue={edit.nombre}
+            InputName="firstName"
+            Inputvalue={edit.firstName}
             InputChange={handleInputChange}
           />
 
           <FormInput
-            InputTitle="Descripción (Objetivo del departamento)"
+            InputTitle="Apellido"
             InputType="text"
-            InputName="descripción"
-            Inputvalue={edit.descripción} 
+            InputName="lastName"
+            Inputvalue={edit.lastName} 
             InputChange={handleInputChange}
           />
 
           <FormInput
-            InputTitle="Encargado del departamento"
+            InputTitle="Nombre de usuario"
             InputType="text"
-            InputName="encargado"
-            Inputvalue={edit.encargado}
+            InputName="userName"
+            Inputvalue={edit.userName}
             InputChange={handleInputChange}
           />
-          <br />
           <FormInput
-            InputTitle="Fecha de creación"
-            InputType="date"
-            InputName="fecha_creacion"
-            Inputvalue={edit.fecha_creacion}
+            InputTitle="Email"
+            InputType="text"
+            InputName="email"
+            Inputvalue={edit.email}
             InputChange={handleInputChange}
           />
           <br />
@@ -111,4 +110,4 @@ export const DepartmentEdit = ({ btnCerrar }: CerrarProps) => {
   );
 };
 
-export default DepartmentEdit;
+export default UserEdit;

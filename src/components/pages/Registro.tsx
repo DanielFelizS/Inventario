@@ -3,7 +3,7 @@ import BtnAction from "../atoms/Buttons/Button";
 import InputDoble from "../atoms/Inputs/InputCarac";
 import { Form, Modal } from "react-bootstrap";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 import api from "../../axiosData.mts";
 
 export default function Registro() {
@@ -28,15 +28,13 @@ export default function Registro() {
       };
       const send = await api.post("/usuarios/registro", DataRegister);
       const sendData = send.data;
-      if(sendData.isSucceed){
-      setData([...data, sendData]);
-      alert("El usuario ha sido registrado correctamente");
-      navigate("/Dispositivo");
-      }
-      else{
+      if (sendData.isSucceed) {
+        setData([...data, sendData]);
+        alert("El usuario ha sido registrado correctamente");
+        navigate("/Dispositivo");
+      } else {
         alert(sendData.message);
       }
-
     } catch (error) {
       console.error(`Error: ${error}`);
     }
@@ -46,7 +44,7 @@ export default function Registro() {
     const SendRoles = await api.post("/usuarios/seed-roles");
     setDataRoles([...dataRoles, SendRoles.data]);
     // console.log("Roles activados");
-  }
+  };
 
   useEffect(() => {
     GetRoles();
@@ -54,12 +52,11 @@ export default function Registro() {
 
   return (
     <div className="modal show login">
-      <Modal.Dialog>
-        {/* <Modal.Header closeButton  onClick={Navegar}> 
-        <Modal.Title>Datos del equipo</Modal.Title>
-      </Modal.Header> */}
+      <Modal.Dialog className="Login-Cont Register-Cont">
+        <h1 id="Titulo-Login">Registrar usuario</h1>
+
         <Modal.Body>
-          <Form>
+          <Form className="Login-Form Register-Form">
             <InputDoble
               InputName="Nombre y apellido"
               FirstValue={firstName}
@@ -94,16 +91,16 @@ export default function Registro() {
               Inputvalue={password}
               InputChange={(e) => setPassword(e.target.value)}
             />
+            <br />
+            <div style={{ textAlign: "center" }} className="Btn-Login">
+              <BtnAction
+                btnlabel="Registrarse"
+                btncolor="success"
+                action={handleRegister}
+              />
+            </div>
           </Form>
         </Modal.Body>
-        <br />
-        <Modal.Footer>
-          <BtnAction
-            btnlabel="Registrarse"
-            btncolor="primary"
-            action={handleRegister}
-          />
-        </Modal.Footer>
       </Modal.Dialog>
     </div>
   );

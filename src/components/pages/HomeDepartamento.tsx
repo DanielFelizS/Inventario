@@ -5,7 +5,7 @@ import { saveAs } from 'file-saver';
 import api from '../../axiosData.mts';
 import InputBusqueda from '../atoms/Inputs/InputBusqueda';
 import { useState } from 'react';
-
+import Navigation from '../molecules/Navbar';
 
 export const HomeDepartamento = () => {
 
@@ -32,17 +32,19 @@ export const HomeDepartamento = () => {
   };
 
   const Datos = ['id', 'nombre', 'descripción', 'fecha_creacion', 'encargado'];
+  const Headers = ['ID', 'Nombre', 'Descripción', 'Fecha de creación', 'Encargado'];
 
   return (
     <>
+      <Navigation/>
       <div className='btn-Agregar'>
 
         <InputBusqueda SearchValue={search} EventSearch={handleChangeSearch} />
 
-        <BtnAction btncolor='success' action={handleNavigate} btnlabel='AgregarDatos'/> 
+        <BtnAction btncolor='success' action={handleNavigate} btnlabel='Agregar departamento'/> 
       </div>
       <br />
-      <Table APIPath='departamento' APINames= {Datos} VerDatos={'VerDepartamento'} EditarDatos={'EditarDepartamento'} EliminarDatos={'EliminarDepartamento'} searchData={search}/>
+      <Table APIPath='departamento' APINames= {Datos} EditarDatos={'EditarDepartamento'} EliminarDatos={'EliminarDepartamento'} searchData={search} Header={Headers}/>
       <br />
       <BtnAction btncolor='success' action={Reporte} btnlabel='Generar reporte'/> 
     </>

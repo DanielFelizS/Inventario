@@ -1,66 +1,23 @@
 *{
-  /* margin:0;
-  padding:0; */
+  margin:0;
+  padding:0;
   box-sizing: border-box;
   text-decoration: none;
 }
-.container{
-  display:flex;
-  margin: 0;
-  padding: 0;
-}
-main{
+
+#navbar {
   width: 100%;
-  padding: 20px;
-}
-.sidebar{
-  background: #000;
-  color: #fff;
-  height: 102vh;
-  width: 200px;
-  transition: all 0.5s;
-}
-.top_section{
-  display: flex;
-  align-items:center;
-  padding:20px 15px;
-}
-.logo{
-  font-size: 30px;
-}
-.bars{
-  display: flex;
-  font-size: 25px;
-  margin-left: 50px;
-}
-.link{
-  display: flex;
-  color: #fff;
-  padding: 10px 15px;
-  gap: 15px;
-  transition: all 0.5s;
-  text-decoration: none;
-}
-.link:hover{
-  background:lightskyblue;
-  color: #000;
-  transition: all 0.5s;
-}
-.active{
-  background: lightskyblue;
-  color: #000;
-}
-.icon, .link_text{
-  font-size: 20px;
+  position: fixed;
+  /* z-index: 1;  */
+  top: 0;
 }
 
 table{
-  border-collapse: collapse;
-  border-spacing: 0;
-  width: 90%;
+  text-align: center;
+  width: 100%;
   border: 1px solid #ddd;
-  margin: 0 auto;
   margin-top: 10px;
+  border-collapse: collapse;
 }
 
 thead{
@@ -71,29 +28,54 @@ thead{
 th, td{
   text-align: center;
   padding-top: 16px;
-  padding-left: 6px;
+  padding-left: 16px;
   padding-bottom: 16px;
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+th{
+  padding: 10px;
 }
 
 tr:nth-child(even){
   background-color: #f2f2f2;
 }
+tr{
+  text-align: center;
+  padding-top: 16px;
+  padding-left: 16px;
+  padding-bottom: 16px;
+}
+
+/* th {
+  background-color: #f2f2f2; 
+} */
+
+
+td {
+  min-width: 200px; 
+}
+
+
+#TableActions{
+  width: 180px;
+  margin-left: 10px;
+}
+
 .btn-user{
   /* border-radius: 60px; */
   color: #f2f2f2;
   /* background-color: gray;  */
   font-size: 26px;;
 }
+
 input{
   padding: 3px;
   width: 220px;
   border-radius: 10px;
-  /* text-align: center; */
 }
+
 .login {
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
   display: block;
   position: absolute;
   width: 60%;
@@ -139,11 +121,71 @@ input{
 .Login-Form input{
   margin-bottom: 14px;
 }
+
+.Register-Form{
+  height: 460px;
+}
+
+.Register-Cont{
+  width: 60%;
+  height: 460px;
+}
+
 .btn-Agregar{
-  width: 120%;
-  /* background-color: red; */
+  width: 110%;
+  position: fixed;
+  /* z-index: 1;  */
+  top: 60px;
 }
 
 .btn-Agregar input{
   margin: auto 50% auto 20px;
+}
+
+.btn-Usuarios{
+  width: 105%;
+  position: fixed;
+  /* z-index: 1;  */
+  top: 60px;
+}
+
+.btn-Usuarios input{
+  margin: auto 40% auto 20px;
+}
+
+.FormData{
+  margin: auto;
+  margin-top: 2%;
+  max-width: 86%;
+}
+
+.SelectData{
+  width: 30%;
+}
+
+/* Media queries para hacer los formularios responsivos */
+@media screen and (max-width: 768px) {
+  /* Estilos para dispositivos pequeños como tablets */
+  .login {
+    width: 80%;
+    margin: 60px auto;
+  }
+
+  /* Ajuste de ancho para los inputs en dispositivos pequeños */
+  .Login-Form input, .Register-Form input {
+    width: 95%;
+    margin-left: 2.5%;
+  }
+
+  .Login-Form label, .Register-Form label {
+    width: 95%;
+    margin-left: 2.5%;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  /* Estilos para dispositivos extra pequeños como teléfonos móviles */
+  .login {
+    width: 90%;
+  }
 }
