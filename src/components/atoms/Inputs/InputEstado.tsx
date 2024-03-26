@@ -9,6 +9,7 @@ export const SelectForm = ({
   Select1,
   Select2,
   Select3,
+  Select4
 }: SelectFormProps) => {
   return (
     <>
@@ -19,10 +20,11 @@ export const SelectForm = ({
         value={Inputvalue}
         onChange={InputChange}
       >
-        <option value="">Escoge una opción</option>
+        <option disabled>Escoge una opción</option>
         <option value={Select1}>{Select1}</option>
         <option value={Select2}>{Select2}</option>
         <option value={Select3}>{Select3}</option>
+        <option value={Select4}>{Select4}</option>
       </Form.Control>
     </>
   );

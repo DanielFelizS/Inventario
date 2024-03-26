@@ -19,7 +19,6 @@ export const HomeUsuario = () => {
 
     const handleChangeSearch = (e: any)=>{
       setSearch(e.target.value);
-      console.log(search);
     }
 
     const navigate = useNavigate();

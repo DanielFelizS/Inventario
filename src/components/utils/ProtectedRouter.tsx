@@ -1,16 +1,15 @@
-import { Navigate, Outlet } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
+// import { useEffect } from "react";
 
-const ProtectedRoute = ({
-    canActivate,
-    redirectPath = '/'
-}: { 
-    canActivate: any, 
-    redirectPath?: string 
-}) => {
-    if (!canActivate) {
-        return <Navigate to={redirectPath} replace />;
-    }
-    return <Outlet />;
-}
-
-export default ProtectedRoute;
+// const ProtectedRoute = ({ element: Element, canActivate, redirectPath }: any) => {
+//     const navigate = useNavigate();
+  
+//     useEffect(() => {
+//       if (!canActivate) {
+//         navigate(redirectPath);
+//       }
+//     }, [canActivate, navigate, redirectPath]);
+  
+//     return canActivate ? <Element /> : null;
+//   };
+// export default ProtectedRoute;

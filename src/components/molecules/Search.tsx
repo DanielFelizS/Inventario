@@ -38,7 +38,7 @@ const Search = <T extends DataType>({
               return (
                 <td key={columnName}>
                   {columnName === "fecha_modificacion" ||
-                  columnName === "fecha_creacion"
+                  columnName === "fecha_creacion" || columnName === "fecha"
                     ? dayjs(item[columnName]).format("DD/MM/YYYY")
                     : item[columnName]}
                 </td>

@@ -160,8 +160,8 @@ export const DevicesAdd = ({ Navegar }: NavegarProps) => {
             Select1="Dañado"
             Select2="Funcionando"
             Select3="En reparación"
+            Select4="Irreparable"
           />
-          <br />
           <FormInput
             InputTitle="Fecha de modificación"
             InputType="date"

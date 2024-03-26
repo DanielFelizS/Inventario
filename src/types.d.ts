@@ -72,6 +72,7 @@ export type SelectFormProps = {
     Select1: string,
     Select2: string,
     Select3: string;
+    Select4: string;
 }
 
 export type InputTextProps = {

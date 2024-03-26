@@ -13,7 +13,6 @@ export const HomeDepartamento = () => {
 
   const handleChangeSearch = (e: any)=>{
     setSearch(e.target.value);
-    console.log(search);
   }
 
   const navigate = useNavigate();
@@ -23,7 +22,7 @@ export const HomeDepartamento = () => {
 
   const Reporte = async () => {
     try {
-      const response = await api.get(`/departamento/reporte`, { responseType: 'blob' });
+      const response = await api.get(`/departamento/reporte?filter=${search}`, { responseType: 'blob' });
       const blob = new Blob([response.data], { type: 'application/pdf' });
       saveAs(blob, 'Departamentos.pdf');
     } catch (error) {
@@ -31,8 +30,18 @@ export const HomeDepartamento = () => {
     }
   };
 
+  const ExportarExcel = async () => {
+    try {
+      const response = await api.get(`/departamento/exportar-excel?filter=${search}`, { responseType: 'blob' });
+      const blob = new Blob([response.data], { type: 'application/xlsx' });
+      saveAs(blob, 'Departamentos.xlsx');
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   const Datos = ['id', 'nombre', 'descripción', 'fecha_creacion', 'encargado'];
-  const Headers = ['ID', 'Nombre', 'Descripción', 'Fecha de creación', 'Encargado'];
+  const Headers = ['ID', 'Nombre', 'Descripción', 'Fecha de creación', 'Encargado del departamento'];
 
   return (
     <>
@@ -46,7 +55,8 @@ export const HomeDepartamento = () => {
       <br />
       <Table APIPath='departamento' APINames= {Datos} EditarDatos={'EditarDepartamento'} EliminarDatos={'EliminarDepartamento'} searchData={search} Header={Headers}/>
       <br />
-      <BtnAction btncolor='success' action={Reporte} btnlabel='Generar reporte'/> 
+      <BtnAction btncolor='success' action={Reporte} btnlabel='Generar reporte'/>
+      <BtnAction btncolor='success' action={ExportarExcel} btnlabel='Exportar a excel'/> 
     </>
   )
 }

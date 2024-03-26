@@ -8,13 +8,10 @@ import { useNavigate } from "react-router-dom";
 import { DepartamentAddState, NavegarProps } from "../../../types.js";
 
 export const DepartmentAdd = ({ Navegar }: NavegarProps) => {
-  const [nombreDepartamento, setNombreDepartamento] =
-    useState<DepartamentAddState["nombre"]>("");
-  const [descripcion, setDescripcion] =
-    useState<DepartamentAddState["descripción"]>("");
+  const [nombreDepartamento, setNombreDepartamento] = useState<DepartamentAddState["nombre"]>("");
+  const [descripcion, setDescripcion] = useState<DepartamentAddState["descripción"]>("");
   const [fecha, setFecha] = useState<DepartamentAddState["fecha_creacion"]>("");
-  const [encargado, setEncargado] =
-    useState<DepartamentAddState["encargado"]>("");
+  const [encargado, setEncargado] = useState<DepartamentAddState["encargado"]>("");
   const [data, setData] = useState<DepartamentAddState["departamentoData"]>([]);
 
   const agregarDatos = async () => {
@@ -67,7 +64,6 @@ export const DepartmentAdd = ({ Navegar }: NavegarProps) => {
             Inputvalue={encargado}
             InputChange={(e) => setEncargado(e.target.value)}
           />
-          <br />
           <FormInput
             InputTitle="Fecha de creación"
             InputType="date"

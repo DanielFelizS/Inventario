@@ -8,7 +8,7 @@
 #navbar {
   width: 100%;
   position: fixed;
-  /* z-index: 1;  */
+  z-index: 1; 
   top: 0;
 }
 
@@ -159,9 +159,9 @@ input{
   max-width: 86%;
 }
 
-.SelectData{
+/* .SelectData{
   width: 30%;
-}
+} */
 
 /* Media queries para hacer los formularios responsivos */
 @media screen and (max-width: 768px) {

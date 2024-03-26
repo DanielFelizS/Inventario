@@ -7,10 +7,10 @@ import { LoginAction } from "../LoginAction";
 import { LoginData } from "../../types";
 
 export const Login = () => {
+
   const [username, setUsername] = useState<LoginData["userName"]>("");
   const [password, setPassword] = useState<LoginData["password"]>("");
   const [user, setUser] = useState("");
-
   const navigate = useNavigate();
 
   const handleLogin = async () => {

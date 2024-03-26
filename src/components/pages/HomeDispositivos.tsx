@@ -12,18 +12,27 @@ export const HomeDispositivos = () => {
 
   const handleChangeSearch = (e: any)=>{
     setSearch(e.target.value);
-    console.log(search);
   }
 
   const Reporte = async () => {
     try {
-      const response = await api.get(`/dispositivos/reporte`, { responseType: 'blob' });
+      const response = await api.get(`/dispositivos/reporte?filter=${search}`, { responseType: 'blob' });
       const blob = new Blob([response.data], { type: 'application/pdf' });
       saveAs(blob, 'Detalle_Equipos.pdf');
     } catch (error) {
       console.error(error);
     }
-  };
+  }
+    
+    const ExportarExcel = async () => {
+      try {
+        const response = await api.get(`/dispositivos/exportar-excel?filter=${search}`, { responseType: 'blob' });
+        const blob = new Blob([response.data], { type: 'application/xlsx' });
+        saveAs(blob, 'Equipos.xlsx');
+      } catch (error) {
+        console.error(error);
+      }
+    }
 
   const navigate = useNavigate();
   const handleNavigate = () => {
@@ -42,11 +51,20 @@ export const HomeDispositivos = () => {
 
       <BtnAction btncolor='success' action={handleNavigate} btnlabel='Agregar equipo'/> 
       </div>
+      <br />
+      <select value={search} onChange={handleChangeSearch} className="SelectData">
+            <option disabled>Estado del equipo</option>
+              <option>Dañado</option>
+              <option>Funcionando</option>
+              <option>En reparación</option>
+              <option>Irreparable</option>
+          </select>
 
       <br />
       <Table APIPath='dispositivos' APINames={Datos} EditarDatos={'EditarDispositivo'} EliminarDatos={'EliminarDispositivos'} searchData={search} Header={Headers}/>
       <br/>
       <BtnAction btncolor='success' action={Reporte} btnlabel='Generar reporte'/>
+      <BtnAction btncolor='success' action={ExportarExcel} btnlabel='Exportar excel'/>
     </>
   )
 }

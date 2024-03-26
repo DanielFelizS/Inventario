@@ -13,7 +13,6 @@ export const HomeComputer = () => {
 
   const handleChangeSearch = (e: any)=>{
     setSearch(e.target.value);
-    console.log(search);
   }
 
   const navigate = useNavigate();
@@ -23,7 +22,7 @@ export const HomeComputer = () => {
   
   const Reporte = async () => {
     try {
-      const response = await api.get(`/computer/reporte`, { responseType: 'blob' });
+      const response = await api.get(`/computer/reporte?filter=${search}`, { responseType: 'blob' });
       const blob = new Blob([response.data], { type: 'application/pdf' });
       saveAs(blob, 'Detalle_Computadoras.pdf');
     } catch (error) {
@@ -31,9 +30,19 @@ export const HomeComputer = () => {
     }
   };
 
+  const ExportarExcel = async () => {
+    try {
+      const response = await api.get(`/computer/exportar-excel?filter=${search}`, { responseType: 'blob' });
+      const blob = new Blob([response.data], { type: 'application/xlsx' });
+      saveAs(blob, 'ComponentesPc.xlsx');
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   const Datos = ['id', 'nombre_equipo', 'ram', 'disco_duro', 'procesador', 'ventilador', 'fuentePoder', 'motherBoard', 'tipo_MotherBoard'];
 
-  const Headers = ['ID', 'Nombre', 'RAM', 'Disco duro', 'Procesador', 'Ventilador', 'Fuente de poder', 'Motherboard', 'Tipo de motherboard'];
+  const Headers = ['ID', 'Equipo', 'RAM', 'Disco duro', 'Procesador', 'Ventilador', 'Fuente de poder', 'Motherboard', 'Tipo de motherboard'];
 
   return (
     <>
@@ -42,12 +51,12 @@ export const HomeComputer = () => {
         <InputBusqueda SearchValue={search} EventSearch={handleChangeSearch} />
         <BtnAction btncolor='success' action={handleNavigate} btnlabel='Agregar equipo'/> 
       </div>
-      
       <br />
 
       <Table APIPath='computer' APINames={Datos} EditarDatos={'EditarPc'} EliminarDatos={'EliminarPc'} searchData={search} Header={Headers}/>
       <br />
       <BtnAction btncolor='success' action={Reporte} btnlabel='Generar reporte'/> 
+      <BtnAction btncolor='success' action={ExportarExcel} btnlabel='Exportar excel'/> 
 
     </>
   )

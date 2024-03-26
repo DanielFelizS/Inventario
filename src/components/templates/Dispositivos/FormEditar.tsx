@@ -170,6 +170,7 @@ export const DevicesEdit = ({ btnCerrar }: CerrarProps) => {
             Select1="Dañado"
             Select2="Funcionando"
             Select3="En reparación"
+            Select4="Irreparable"
           />
 
           <FormInput

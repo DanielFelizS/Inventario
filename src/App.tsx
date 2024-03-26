@@ -8,6 +8,7 @@ import HomeDispositivos from './components/pages/HomeDispositivos';
 import HomeDepartamento from './components/pages/HomeDepartamento';
 import HomeComputer from './components/pages/HomePc';
 import HomeUsuario from './components/pages/HomeUsuario';
+import HomeAuditoria from './components/pages/HomeAuditoria';
 
 import AgregarDispositivo from './components/pages/AgregarDispositivo';
 import EditarDispositivo from './components/pages/EditarDispositivo';
@@ -21,11 +22,11 @@ import EliminarComputer from './components/pages/EliminarPc';
 
 import EliminarUsuario from './components/pages/EliminarUsuario';
 import EditarUsuario from './components/pages/EditarUsuario';
-import { useLocalStorage } from 'react-use';
+// import { useLocalStorage } from 'react-use';
 import Navbar from './components/molecules/Navbar';
 
 export const App = () => {
-  const [user, setUser] = useLocalStorage('token');
+  // const [user, setUser] = useLocalStorage('token');
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -43,10 +44,16 @@ export const App = () => {
       <Route path="/Dispositivo" element={<HomeDispositivos />} />
         <Route path="/Departamentos" element={<HomeDepartamento />} />
         <Route path="/Computer" element={<HomeComputer />} />
+        <Route path="/Historial" element={<HomeAuditoria />} />
       {/* </Route> */}
 
         {/* Navegaciones principales */}
         <Route path="/Login" element={<Login />} />
+
+        {/* <Route path="/Login" render={()=> {
+        return user ? null : <Login />
+        }}/> */}
+
         <Route path="/Registro" element={<Registro />} />
         {/* <Route path="/Inicio" element={<HomePage />} /> */}
         <Route path="/Dispositivo" element={<HomeDispositivos />} />
@@ -68,13 +75,12 @@ export const App = () => {
         <Route path="/EditarPc/:id" element={<EditarComputer />} />
         <Route path="/EliminarPc/:id" element={<EliminarComputer />} />
 
+        {/* Usuario */}
         <Route path="/EditarUsuario/:id" element={<EditarUsuario />} />
         <Route path="/EliminarUsuario/:id" element={<EliminarUsuario />} />
 
-
         {/* Otros */}
         <Route path="/" element={<Navbar />} />
-
       </Routes>
     </>
   );
