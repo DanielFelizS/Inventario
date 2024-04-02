@@ -8,7 +8,7 @@ import api from "../../../axiosData.mjs";
 import { useNavigate } from "react-router-dom";
 import { ComputerAddState, NavegarProps } from "../../../types.js";
 
-export const ComputerAdd = ({ Navegar }: NavegarProps) => {
+export default function ComputerAdd ({ Navegar }: NavegarProps) {
 
   const [idEquipo, setIdEquipo] = useState<ComputerAddState["equipo_Id"]>("");
   const [ram, setRam] = useState<ComputerAddState["ram"]>("");
@@ -20,6 +20,25 @@ export const ComputerAdd = ({ Navegar }: NavegarProps) => {
   const [tipoMotherBoard, setTipoMotherBoard] = useState<ComputerAddState["tipo_MotherBoard"]>("");
   const [data, setData] = useState<ComputerAddState["ComputerData"]>([]);
   const [dispositivos, setDispositivos] = useState<any>([]);
+  const [error, setError] = useState("");
+  const [search, setSearch] = useState('');
+
+  const handleChangeSearch = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setSearch(value);
+    try {
+      const response = await api.get(`/dispositivos/all/search?search=${value}`);
+      if (Array.isArray(response.data)) {
+        setDispositivos(response.data);
+      } else {
+        setError("Los datos no son una lista (arrays)");
+        console.error('Error: la respuesta de la API no contiene un array', response.data);
+      }
+    } catch (error) {
+      setError("No se pudieron obtener los datos de los dispositivos");
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
     obtenerDatos();
@@ -27,13 +46,15 @@ export const ComputerAdd = ({ Navegar }: NavegarProps) => {
 
   const obtenerDatos = async () => {
     try {
-      const response = await api.get(`/dispositivos/all`);
+      const response = await api.get(`/dispositivos/all/search?search=${search}`);
       if (Array.isArray(response.data)) {
         setDispositivos(response.data);
       } else {
+        setError("Los datos no son una lista (arrays)");
         console.error('Error: la respuesta de la API no contiene un array', response.data);
       }
     } catch (error) {
+      setError("No se pudieron obtener los datos de los dispositivos");
       console.error(error);
     }
   };
@@ -57,6 +78,7 @@ export const ComputerAdd = ({ Navegar }: NavegarProps) => {
       alert("Los datos se han agregado correctamente");
       handleNavigate();
     } catch (error) {
+      setError("No se pudieron agregar los datos del computador");
       console.error(error);
   }
 }
@@ -79,15 +101,16 @@ export const ComputerAdd = ({ Navegar }: NavegarProps) => {
 
           <label>Equipo</label>
           <br />
+          <input type="text" value={search} onChange={handleChangeSearch} />
+
           <select value={idEquipo} onChange={handleDispositivoChange} className="SelectData">
-            <option disabled>ID, Modelo, Serial no.</option>
+            <option disabled>ID, dato buscado</option>
             {dispositivos.map((dispositivo: any) => {
               if (dispositivo.nombre_equipo === "CPU" || dispositivo.nombre_equipo === "Laptop") {
-                return <option key={dispositivo.id} value={dispositivo.id}>{dispositivo.id}, {dispositivo.modelo}, {dispositivo.serial_no}</option>;
+               return <option key={dispositivo.id} value={dispositivo.id}>{dispositivo.id}, {search}</option>;
               }
             })}
           </select>
-
           <br />
           <InputDoble
             InputName="RAM y Disco duro"
@@ -145,8 +168,7 @@ export const ComputerAdd = ({ Navegar }: NavegarProps) => {
       <BtnAction btnlabel="Guardar" btncolor="success" action={agregarDatos} />
       </Form>
 
+      { error && <span style={{color: "red"}}>{error}</span> }
     </>
   );
 };
-
-export default ComputerAdd;

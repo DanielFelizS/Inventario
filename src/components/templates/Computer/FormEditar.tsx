@@ -25,31 +25,31 @@ export const ComputerEdit = ({ btnCerrar }: CerrarProps) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    ObtenerDepartameto();
+    obtenerDispositivos();
+    obtenerDatos();
   }, []);
 
-  const ObtenerDepartameto = async () => {
+  const obtenerDispositivos = async () => {
     try {
       const request = await api.get(`/dispositivos/all`);
       if (Array.isArray(request.data)) {
         setDispositivos(request.data);
       } else {
+        setError("Los datos no son una lista (arrays)");
         console.error(error);
       }
     } catch (error) {
+      setError("No se pudieron obtener los datos de los dispositivos");
       console.error(error);
     }
   };
-
-  useEffect(() => {
-    obtenerDatos();
-  }, []);
 
   const obtenerDatos = async () => {
     try {
       const response = await api.get(`/computer/${id}`);
       setEdit(response.data);
     } catch (error) {
+      setError("No se pudieron obtener los datos de la computadora");
       console.error(error);
     }
   };
@@ -66,7 +66,7 @@ export const ComputerEdit = ({ btnCerrar }: CerrarProps) => {
     try {
       if (!edit.id) {
         setError("El ID de la computadora es requerida");
-        alert(error);
+        console.log(error);
       }
 
       const response = await api.put(`/computer/${edit.id}`, edit);
@@ -74,8 +74,8 @@ export const ComputerEdit = ({ btnCerrar }: CerrarProps) => {
       btnCerrar();
       navigate("/Computer");
     } catch (error) {
-      alert(error);
-      setError("Ocurrió un error al editar el dispositivo");
+      setError("Ocurrió un error al editar la computadora");
+      console.log(error);
     }
   };
 
@@ -167,6 +167,8 @@ export const ComputerEdit = ({ btnCerrar }: CerrarProps) => {
           />
         </Form.Group>
       </Form>
+
+      { error && <span style={{color: "red"}}>{error}</span> }
     </>
   );
 };

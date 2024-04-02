@@ -10,6 +10,7 @@ import Navigation from '../molecules/Navbar';
 export const HomeDepartamento = () => {
 
   const [search, setSearch] = useState('');
+  const [msg, setMsg] = useState("");
 
   const handleChangeSearch = (e: any)=>{
     setSearch(e.target.value);
@@ -21,21 +22,27 @@ export const HomeDepartamento = () => {
   };
 
   const Reporte = async () => {
+    setMsg("Generando reporte...");
     try {
       const response = await api.get(`/departamento/reporte?filter=${search}`, { responseType: 'blob' });
       const blob = new Blob([response.data], { type: 'application/pdf' });
       saveAs(blob, 'Departamentos.pdf');
+      setMsg("Descarga exitosa");
     } catch (error) {
+      setMsg("La exportación del reporte ha fallado");
       console.error(error);
     }
   };
 
   const ExportarExcel = async () => {
+    setMsg("Generando excel...");
     try {
       const response = await api.get(`/departamento/exportar-excel?filter=${search}`, { responseType: 'blob' });
       const blob = new Blob([response.data], { type: 'application/xlsx' });
       saveAs(blob, 'Departamentos.xlsx');
+      setMsg("Descarga exitosa");
     } catch (error) {
+      setMsg("La exportación del excel ha fallado");
       console.error(error);
     }
   }
@@ -52,6 +59,8 @@ export const HomeDepartamento = () => {
 
         <BtnAction btncolor='success' action={handleNavigate} btnlabel='Agregar departamento'/> 
       </div>
+      <br/>
+      { msg && <span>{msg}</span> }
       <br />
       <Table APIPath='departamento' APINames= {Datos} EditarDatos={'EditarDepartamento'} EliminarDatos={'EliminarDepartamento'} searchData={search} Header={Headers}/>
       <br />

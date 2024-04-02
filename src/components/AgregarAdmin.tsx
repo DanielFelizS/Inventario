@@ -9,6 +9,7 @@ export type DataProps = {
 const AgregarAdmin = ({MostrarModal, CerrarModal}: any) => {
   const [username, setUsername] = useState<string>("");
   const [data, setData] = useState<DataProps["data"]>([]);
+  const [error, setError] = useState("");
 
   const AddAdmin = async () => {
     try {
@@ -28,6 +29,7 @@ const AgregarAdmin = ({MostrarModal, CerrarModal}: any) => {
       //   alert(responseData.message);
       // }
     } catch (error) {
+      setError(`Error al agregar un administrador`);
       console.error(`Error al agregar un administrador:  ${error}`);
     }
   };
@@ -45,6 +47,8 @@ const AgregarAdmin = ({MostrarModal, CerrarModal}: any) => {
           setUsername(e.target.value)
         }
       />
+      { error && <span style={{color: "red"}}>{error}</span> }
+
     </>
   );
 };

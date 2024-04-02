@@ -15,9 +15,7 @@ export const UserEdit = ({ btnCerrar }: CerrarProps) => {
     email: ""
   });
   const [error, setError] = useState("");
-
   const { id } = useParams();
-
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,6 +27,7 @@ export const UserEdit = ({ btnCerrar }: CerrarProps) => {
       const response = await api.get(`/usuarios/${id}`);
       setEdit(response.data);
     } catch (error) {
+      setError("No se pudo obtener los datos del usuario");
       console.error(error);
     }
   };
@@ -45,7 +44,6 @@ export const UserEdit = ({ btnCerrar }: CerrarProps) => {
     try {
       if (!edit.id) {
         setError("El ID del usuario es requerido");
-        alert(error);
       }
 
       const response = await api.put(`/usuarios/${edit.id}`, edit);
@@ -53,9 +51,10 @@ export const UserEdit = ({ btnCerrar }: CerrarProps) => {
       alert(response.data);
       btnCerrar();
       navigate("/Usuarios");
-    } catch (error) {
-      alert(error);
+    }
+    catch (error) {
       setError("Ocurrió un error al editar el usuario");
+      console.error(error);
     }
   };
 
@@ -106,6 +105,8 @@ export const UserEdit = ({ btnCerrar }: CerrarProps) => {
           />
         </Form.Group>
       </Form>
+      
+      { error && <span style={{color: "red"}}>{error}</span> }
     </>
   );
 };

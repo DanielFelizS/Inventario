@@ -7,7 +7,7 @@ import AgregarAdmin from '../AgregarAdmin';
 import InputBusqueda from '../atoms/Inputs/InputBusqueda';
 import Navigation from '../molecules/Navbar';
 
-export const HomeUsuario = () => {
+export default function HomeUsuario () {
     const [admin, setAdmin] = useState(false);
     const handleAdmin = () => setAdmin(true);
     const handleCloseAdmin = () => setAdmin(false);
@@ -52,5 +52,3 @@ export const HomeUsuario = () => {
     </>
   )
 }
-
-export default HomeUsuario;

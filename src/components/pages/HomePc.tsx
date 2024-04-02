@@ -7,9 +7,10 @@ import InputBusqueda from '../atoms/Inputs/InputBusqueda';
 import { useState } from 'react';
 import Navigation from '../molecules/Navbar';
 
-export const HomeComputer = () => {
+export default function HomeComputer () {
 
   const [search, setSearch] = useState('');
+  const [msg, setMsg] = useState("");
 
   const handleChangeSearch = (e: any)=>{
     setSearch(e.target.value);
@@ -21,21 +22,27 @@ export const HomeComputer = () => {
   };
   
   const Reporte = async () => {
+    setMsg("Generando Reporte...");
     try {
       const response = await api.get(`/computer/reporte?filter=${search}`, { responseType: 'blob' });
       const blob = new Blob([response.data], { type: 'application/pdf' });
       saveAs(blob, 'Detalle_Computadoras.pdf');
-    } catch (error) {
-      console.error(error);
-    }
+      setMsg("Descarga exitosa");
+      } catch (error) {
+        setMsg("La exportación del reporte ha fallado");
+        console.error(error);
+      }
   };
 
   const ExportarExcel = async () => {
+    setMsg("Generando excel...");
     try {
       const response = await api.get(`/computer/exportar-excel?filter=${search}`, { responseType: 'blob' });
       const blob = new Blob([response.data], { type: 'application/xlsx' });
       saveAs(blob, 'ComponentesPc.xlsx');
+      setMsg("Descarga exitosa");
     } catch (error) {
+      setMsg("La exportación del excel ha fallado");
       console.error(error);
     }
   }
@@ -52,7 +59,8 @@ export const HomeComputer = () => {
         <BtnAction btncolor='success' action={handleNavigate} btnlabel='Agregar equipo'/> 
       </div>
       <br />
-
+      { msg && <span>{msg}</span> }
+      <br />
       <Table APIPath='computer' APINames={Datos} EditarDatos={'EditarPc'} EliminarDatos={'EliminarPc'} searchData={search} Header={Headers}/>
       <br />
       <BtnAction btncolor='success' action={Reporte} btnlabel='Generar reporte'/> 
@@ -61,5 +69,3 @@ export const HomeComputer = () => {
     </>
   )
 }
-
-export default HomeComputer;

@@ -1,5 +1,4 @@
 import ModalUser from "./atoms/others/Modal";
-import { Button } from "react-bootstrap";
 import api from "../axiosData.mts";
 import { SetStateAction, useState } from "react";
 
@@ -10,6 +9,7 @@ export type DataProps = {
 const AgregarSoporte = ({ MostrarModal, CerrarModal }: any) => {
   const [username, setUsername] = useState<string>("");
   const [data, setData] = useState<DataProps["data"]>([]);
+  const [error, setError] = useState("");
 
   const AddSoporte = async () => {
     try {
@@ -29,15 +29,13 @@ const AgregarSoporte = ({ MostrarModal, CerrarModal }: any) => {
       //   alert(responseData.message);
       // }
     } catch (error) {
-      console.error(`Error al agregar un administrador:  ${error}`);
+      setError("Error al agregar un soporte técnico");
+      console.error(`Error al agregar un soporte técnico:  ${error}`);
     }
   };
   
   return (
     <>
-    {/* <Button variant="primary" onClick={MostrarModal}>
-        Agregar Soporte
-      </Button> */}
 
       <ModalUser
         ModalTitle={"Agregar Soporte"}
@@ -49,6 +47,8 @@ const AgregarSoporte = ({ MostrarModal, CerrarModal }: any) => {
           setUsername(e.target.value)
         }
       />
+      { error && <span style={{color: "red"}}>{error}</span> }
+
     </>
   );
 };

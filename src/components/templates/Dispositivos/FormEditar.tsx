@@ -25,7 +25,6 @@ export const DevicesEdit = ({ btnCerrar }: CerrarProps) => {
   const [departamentos, setDepartamentos] = useState<any>([]);
   const [error, setError] = useState("");
 
-
   useEffect(() => {
     ObtenerDepartameto();
   }, []);
@@ -56,6 +55,7 @@ export const DevicesEdit = ({ btnCerrar }: CerrarProps) => {
       const response = await api.get(`/dispositivos/${id}`);
       setEdit(response.data);
     } catch (error) {
+      setError("Error al consultarse los datos");
       console.error(error);
     }
   };
@@ -72,7 +72,7 @@ export const DevicesEdit = ({ btnCerrar }: CerrarProps) => {
     try {
       if (!edit.id) {
         setError("El ID del dispositivo es requerido");
-        alert(error);
+        console.error(error);
       }
 
       const response = await api.put(`/dispositivos/${edit.id}`, edit);
@@ -80,8 +80,8 @@ export const DevicesEdit = ({ btnCerrar }: CerrarProps) => {
       btnCerrar();
       navigate("/Dispositivo");
     } catch (error) {
-      alert(error);
       setError("Ocurrió un error al editar el dispositivo");
+      console.error(error);
     }
   };
 
@@ -194,6 +194,7 @@ export const DevicesEdit = ({ btnCerrar }: CerrarProps) => {
           />
         </Form.Group>
       </Form>
+      { error && <span style={{color: "red"}}>{error}</span> }
     </>
   );
 };

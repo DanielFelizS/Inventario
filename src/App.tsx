@@ -1,7 +1,7 @@
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 // import ProtectedRoute from './components/utils/ProtectedRouter';
-// import HomePage from './components/pages/HomePage'
+import HomePage from './components/pages/HomePage'
 import Login from './components/pages/Login';
 import Registro from './components/pages/Registro';
 import HomeDispositivos from './components/pages/HomeDispositivos';
@@ -55,7 +55,7 @@ export const App = () => {
         }}/> */}
 
         <Route path="/Registro" element={<Registro />} />
-        {/* <Route path="/Inicio" element={<HomePage />} /> */}
+        <Route path="/Inicio" element={<HomePage />} />
         <Route path="/Dispositivo" element={<HomeDispositivos />} />
         <Route path="/Departamentos" element={<HomeDepartamento />} />
         <Route path="/Computer" element={<HomeComputer />} />

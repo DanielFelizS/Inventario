@@ -3,7 +3,7 @@ import BtnAction from "../atoms/Buttons/Button";
 import InputDoble from "../atoms/Inputs/InputCarac";
 import { Form, Modal } from "react-bootstrap";
 import { useState, useEffect } from "react";
-import { useNavigate, NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import api from "../../axiosData.mts";
 
 export default function Registro() {
@@ -14,6 +14,7 @@ export default function Registro() {
   const [email, setEmail] = useState("");
   const [data, setData] = useState<any>([]);
   const [dataRoles, setDataRoles] = useState<any>([]);
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
@@ -33,10 +34,11 @@ export default function Registro() {
         alert("El usuario ha sido registrado correctamente");
         navigate("/Dispositivo");
       } else {
-        alert(sendData.message);
+        setError(sendData.message);
       }
     } catch (error) {
-      console.error(`Error: ${error}`);
+      setError("Error en el inicio de sesión");
+      console.error(error);
     }
   };
 
@@ -91,6 +93,7 @@ export default function Registro() {
               Inputvalue={password}
               InputChange={(e) => setPassword(e.target.value)}
             />
+            { error && <span style={{color: "red"}}>{error}</span> }
             <br />
             <div style={{ textAlign: "center" }} className="Btn-Login">
               <BtnAction

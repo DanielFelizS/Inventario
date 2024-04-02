@@ -13,6 +13,7 @@ export const DepartmentAdd = ({ Navegar }: NavegarProps) => {
   const [fecha, setFecha] = useState<DepartamentAddState["fecha_creacion"]>("");
   const [encargado, setEncargado] = useState<DepartamentAddState["encargado"]>("");
   const [data, setData] = useState<DepartamentAddState["departamentoData"]>([]);
+  const [error, setError] = useState("");
 
   const agregarDatos = async () => {
     const postData = {
@@ -28,6 +29,7 @@ export const DepartmentAdd = ({ Navegar }: NavegarProps) => {
       alert("Los datos se han agregado correctamente");
       handleNavigate();
     } catch (error) {
+      setError("Error al agregar los datos");
       console.error(error);
     }
   };
@@ -79,6 +81,7 @@ export const DepartmentAdd = ({ Navegar }: NavegarProps) => {
           action={agregarDatos}
         />
       </Form>
+      { error && <span style={{color: "red"}}>{error}</span> }
     </>
   );
 };

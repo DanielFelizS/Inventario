@@ -29,6 +29,7 @@ export const DepartmentEdit = ({ btnCerrar }: CerrarProps) => {
       const response = await api.get(`/departamento/${id}`);
       setEdit(response.data);
     } catch (error) {
+      setError("Error al obtener los datos del departamento");
       console.error(error);
     }
   };
@@ -45,7 +46,7 @@ export const DepartmentEdit = ({ btnCerrar }: CerrarProps) => {
     try {
       if (!edit.id) {
         setError("El ID del dispositivo es requerido");
-        alert(error);
+        console.log(error);
       }
 
       const response = await api.put(`/departamento/${edit.id}`, edit);
@@ -54,8 +55,8 @@ export const DepartmentEdit = ({ btnCerrar }: CerrarProps) => {
       btnCerrar();
       navigate("/Departamentos");
     } catch (error) {
-      alert(error);
-      setError("Ocurrió un error al editar el dispositivo");
+      setError("Ocurrió un error al editar el departamento");
+      console.log(error);
     }
   };
 
@@ -107,6 +108,8 @@ export const DepartmentEdit = ({ btnCerrar }: CerrarProps) => {
           />
         </Form.Group>
       </Form>
+      { error && <span style={{color: "red"}}>{error}</span> }
+
     </>
   );
 };

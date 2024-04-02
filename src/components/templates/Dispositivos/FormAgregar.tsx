@@ -27,6 +27,7 @@ export const DevicesAdd = ({ Navegar }: NavegarProps) => {
   const [fecha, setFecha] = useState<DevicesAddState["fecha"]>("");
   const [data, setData] = useState<DevicesAddState["data"]>([]);
   const [departamentos, setDepartamentos] = useState<any>([]);
+  const [msg, setMsg] = useState("");
 
   useEffect(() => {
     obtenerDatos();
@@ -66,9 +67,10 @@ export const DevicesAdd = ({ Navegar }: NavegarProps) => {
       const response = await api.post("/dispositivos", postData);
       setData([...data, response.data]);
       console.log(departamentoId);
-      alert("Los datos se han agregado correctamente");
+      setMsg("Los datos se han agregado correctamente");
       handleNavigate();
     } catch (error) {
+      setMsg(`Error al agregar los datos`);
       console.error(error);
     }
   };
@@ -173,6 +175,7 @@ export const DevicesAdd = ({ Navegar }: NavegarProps) => {
       <BtnAction btnlabel="Cancelar" btncolor="danger" action={Navegar} />
       <BtnAction btnlabel="Guardar" btncolor="success" action={agregarDatos} />
       </Form>
+      { msg && <span>{msg}</span> }
     </>
   );
 };

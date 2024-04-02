@@ -2,7 +2,7 @@ import { useState } from "react";
 import FormInput from "../atoms/Inputs/InputText";
 import BtnAction from "../atoms/Buttons/Button";
 import { Form, Modal } from "react-bootstrap";
-import { useNavigate, NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { LoginAction } from "../LoginAction";
 import { LoginData } from "../../types";
 
@@ -11,6 +11,7 @@ export const Login = () => {
   const [username, setUsername] = useState<LoginData["userName"]>("");
   const [password, setPassword] = useState<LoginData["password"]>("");
   const [user, setUser] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleLogin = async () => {
@@ -29,10 +30,11 @@ export const Login = () => {
         setPassword("");
         navigate("/Dispositivo");
       } else {
-        alert("Error: No se recibió el token JWT en la respuesta");
+        setError("No se recibió el token JWT en la respuesta");
       }
     } catch (error) {
-      alert(`Error: ${error}`);
+      setError("Usuario o contraseña incorrecto");
+      console.log(error);
     }
   };
 
@@ -57,6 +59,7 @@ export const Login = () => {
               Inputvalue={password}
               InputChange={(e) => setPassword(e.target.value)}
             />
+            { error && <span style={{color: "red"}}>{error}</span> }
             <br />
             <div style={{ textAlign: "center" }} className="Btn-Login">
               <BtnAction

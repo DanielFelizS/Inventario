@@ -9,6 +9,7 @@ export default function Navigation() {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
+          <NavLink to="/Inicio" className="nav-link">Acerca de</NavLink>
             <NavLink to="/Dispositivo" className="nav-link">Dispositivos</NavLink>
             <NavLink to="/Computer" className="nav-link">Computadoras</NavLink>
             <NavLink to="/Departamentos" className="nav-link">Departamento</NavLink>
