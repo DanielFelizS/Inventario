@@ -1,11 +1,8 @@
-import Table from '../organisms/Table';
-import BtnAction from "../atoms/Buttons/Button";
-import { useNavigate } from "react-router-dom";
-import api from '../../axiosData.mts';
-import { saveAs } from 'file-saver';
-import { useState } from 'react';
-import InputBusqueda from '../atoms/Inputs/InputBusqueda';
-import Navigation from '../molecules/Navbar';
+import {
+  Table, BtnAction, useNavigate,
+  saveAs, api, InputBusqueda,
+  useState, Navigation 
+} from '../Page'
 
 export const HomeDispositivos = () => {
   const [search, setSearch] = useState('');
@@ -87,6 +84,7 @@ export const HomeDispositivos = () => {
       <div className='btn-Agregar'>
 
       <InputBusqueda SearchValue={search} EventSearch={handleChangeSearch} />
+      {/* <FormInput Inputvalue={search} InputChange={handleChangeSearch} InputType='text' InputName='Buscar' /> */}
       <BtnAction btncolor='success' action={handleNavigate} btnlabel='Agregar equipo'/> 
       </div>
 

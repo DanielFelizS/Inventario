@@ -1,22 +1,22 @@
 import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import ComputerEdit from "../templates/Computer/FormEditar";
+import DepartmentEdit from "../../../templates/Departamento/FormEditar";
 import { useNavigate } from "react-router-dom";
 
-export const EditarComputer = () => {
+export const EditarDepartamento = () => {
   const [error] = useState<string>("");
 
   const navigate = useNavigate();
   const NavigateHome = () => {
-    navigate("/Computer");
+    navigate("/Departamentos");
   }
 
   return (
     <>
-      <ComputerEdit btnCerrar={NavigateHome} />
+      <DepartmentEdit btnCerrar={NavigateHome} />
       {error && <p className="text-danger">{error}</p>}
     </>
   );
 };
 
-export default EditarComputer;
+export default EditarDepartamento;

@@ -1,8 +1,8 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
-import api from "../../axiosData.mjs";
+import api from "../../../../axiosData.mjs";
 import { useNavigate, useParams } from "react-router-dom";
-import DeleteUser from "../molecules/DeleteUser";
+import DeleteUser from "../../../molecules/DeleteUser";
 export const EliminarUsuario = () => {
   const [data, setData] = useState<any>("");
 

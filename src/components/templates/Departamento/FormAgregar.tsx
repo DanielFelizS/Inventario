@@ -1,11 +1,9 @@
-import { useState } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { Form } from "react-bootstrap";
-import BtnAction from "../../atoms/Buttons/Button.jsx";
-import FormInput from "../../atoms/Inputs/InputText.jsx";
-import api from "../../../axiosData.mjs";
-import { useNavigate } from "react-router-dom";
-import { DepartamentAddState, NavegarProps } from "../../../types.js";
+import {
+  useState,
+  Form, BtnAction,
+  FormInput, api,useNavigate } from '../Dependencies.js';
+import { NavegarProps } from '../../../types.js';
+import { DepartamentAddState } from './DepartmentTypes.js';
 
 export const DepartmentAdd = ({ Navegar }: NavegarProps) => {
   const [nombreDepartamento, setNombreDepartamento] = useState<DepartamentAddState["nombre"]>("");

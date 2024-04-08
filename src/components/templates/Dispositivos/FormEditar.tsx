@@ -1,12 +1,9 @@
-import React, { useState, useEffect } from "react";
-import BtnAction from "../../atoms/Buttons/Button.jsx";
-import { Form } from "react-bootstrap";
-import SelectForm from "../../atoms/Inputs/InputEstado.jsx";
-import InputDoble from "../../atoms/Inputs/InputCarac.jsx";
-import FormInput from "../../atoms/Inputs/InputText.jsx";
-import api from "../../../axiosData.mjs";
-import { useParams, useNavigate } from "react-router-dom";
-import { CerrarProps, DevicesEditState } from "../../../types.js";
+import {
+  useState, useEffect, SelectForm,
+  Form, BtnAction, InputDoble, FormInput, 
+  api,useNavigate, useParams } from '../Dependencies.js';
+import { CerrarProps } from "../../../types.js";
+import { DevicesEditState } from './DevicesTypes.js';
 
 export const DevicesEdit = ({ btnCerrar }: CerrarProps) => {
   const [edit, setEdit] = useState<DevicesEditState>({
@@ -90,7 +87,7 @@ export const DevicesEdit = ({ btnCerrar }: CerrarProps) => {
           const id = e.target.value;
           setEdit((prevState) => ({
             ...prevState,
-            departamentoId: id,
+            departamentoId: id
           }));
         };
   return (

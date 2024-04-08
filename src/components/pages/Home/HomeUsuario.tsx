@@ -1,11 +1,10 @@
-import Table from '../organisms/Table';
-import BtnAction from "../atoms/Buttons/Button"
-import { useState } from 'react';
-import { useNavigate } from "react-router-dom";
-import AgregarSoporte from '../AgregarSoporte';
-import AgregarAdmin from '../AgregarAdmin';
-import InputBusqueda from '../atoms/Inputs/InputBusqueda';
-import Navigation from '../molecules/Navbar';
+import {
+  Table, BtnAction, useNavigate,
+  InputBusqueda,
+  useState, Navigation 
+} from '../Page'
+import AgregarSoporte from '../../AgregarSoporte';
+import AgregarAdmin from '../../AgregarAdmin';
 
 export default function HomeUsuario () {
     const [admin, setAdmin] = useState(false);
@@ -14,7 +13,6 @@ export default function HomeUsuario () {
     const [soporte, setSoporte] = useState(false);
     const handleSoporte = () => setSoporte(true);
     const handleCloseSoporte = () => setSoporte(false);
-
     const [search, setSearch] = useState('');
 
     const handleChangeSearch = (e: any)=>{
@@ -38,17 +36,13 @@ export default function HomeUsuario () {
         <BtnAction btncolor='success' action={RegistrarUsuario} btnlabel='Registrar un usuario'/>
         <BtnAction btncolor='success' action={handleAdmin} btnlabel='Cambiar a Admin'/>
         <BtnAction btncolor='success' action={handleSoporte} btnlabel='Cambiar a Soporte'/>
-
-        {/* <BtnAction btncolor='success' action={handleNavigate} btnlabel='Registrar usuario'/>  */}
       </div>
       <br />
-
       <AgregarSoporte MostrarModal={soporte} CerrarModal={handleCloseSoporte}/>
       <AgregarAdmin MostrarModal={admin} CerrarModal={handleCloseAdmin}/>
 
       <Table APIPath='usuarios' APINames={Datos} EditarDatos={'EditarUsuario'} EliminarDatos={'EliminarUsuario'} searchData={search} Header={Headers}/>
       <br />
-
     </>
   )
 }

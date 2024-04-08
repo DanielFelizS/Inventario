@@ -1,8 +1,4 @@
-import "bootstrap/dist/css/bootstrap.min.css";
-import { useState } from "react";
-import api from "../../axiosData.mjs";
-import { useNavigate, useParams } from "react-router-dom";
-import DeleteComputer from "../molecules/DeletePc";
+import { DeleteComputer, useNavigate, useParams, useState, api } from "../../Page";
 
 export const EliminarComputer = () => {
   const [data, setData] = useState<any>("");

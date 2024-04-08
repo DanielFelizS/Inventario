@@ -1,19 +1,21 @@
-import Table from '../organisms/Table';
-import BtnAction from "../atoms/Buttons/Button"
-import { useNavigate } from "react-router-dom";
-import { saveAs } from 'file-saver';
-import api from '../../axiosData.mts';
-import InputBusqueda from '../atoms/Inputs/InputBusqueda';
-import { useState } from 'react';
-import Navigation from '../molecules/Navbar';
+import {
+  Table, BtnAction, useNavigate,
+  saveAs, api, InputBusqueda,
+  useState, Navigation 
+} from '../Page'
 
 export const HomeDepartamento = () => {
 
   const [search, setSearch] = useState('');
+  const [file, setFile] = useState<any>(null);
+  // const [ progress, setProgress ] = useState({ started: false, bar: 0});
   const [msg, setMsg] = useState("");
 
   const handleChangeSearch = (e: any)=>{
     setSearch(e.target.value);
+  }
+  const handleFile = (e: any) => {
+    setFile(e.target.files[0]);
   }
 
   const navigate = useNavigate();
@@ -33,6 +35,31 @@ export const HomeDepartamento = () => {
       console.error(error);
     }
   };
+
+  const ImportarExcel = async () => {
+    try {
+      if (!file) {
+        setMsg("No hay un archivo seleccionado");
+      }
+      const formData = new FormData();
+      formData.append('excel', file);
+      setMsg("Subiendo archivo...");
+      // setProgress(prevState => {
+      //   return {...prevState, started: true}
+      // })
+      api.post('/departamento/importar-excel', formData,  {
+        // onUploadProgress: (progressEvent) => {setProgress(prevState => {
+        //     return {...prevState, bar: progressEvent.progress*100}
+        //   })},
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+    } catch (error) {
+      setMsg("Carga fallida");
+      console.error(error);
+    }
+  }
 
   const ExportarExcel = async () => {
     setMsg("Generando excel...");
@@ -60,7 +87,11 @@ export const HomeDepartamento = () => {
         <BtnAction btncolor='success' action={handleNavigate} btnlabel='Agregar departamento'/> 
       </div>
       <br/>
-      { msg && <span>{msg}</span> }
+
+      <input type="file" accept=".xlsx, .xls" onChange={handleFile}/>
+      <BtnAction btncolor='success' action={ImportarExcel} btnlabel='Importar excel'/>
+      {/* { progress.started && <progress max="100" value={progress.bar}></progress> } */}
+      { msg && <span style={{color:"red"}}>{msg}</span> }
       <br />
       <Table APIPath='departamento' APINames= {Datos} EditarDatos={'EditarDepartamento'} EliminarDatos={'EliminarDepartamento'} searchData={search} Header={Headers}/>
       <br />

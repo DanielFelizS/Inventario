@@ -1,13 +1,9 @@
-import { useState, useEffect } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { Form } from "react-bootstrap";
-import BtnAction from "../../atoms/Buttons/Button.jsx";
-import SelectForm from "../../atoms/Inputs/InputEstado.jsx";
-import InputDoble from "../../atoms/Inputs/InputCarac.jsx";
-import FormInput from "../../atoms/Inputs/InputText.jsx";
-import api from "../../../axiosData.mjs";
-import { useNavigate } from "react-router-dom";
-import { DevicesAddState, NavegarProps } from "../../../types.js";
+import {
+  useState, useEffect, Form,
+  BtnAction, InputDoble, SelectForm,
+  FormInput, api, useNavigate } from '../Dependencies.js';
+import { NavegarProps } from '../../../types.js';
+import { DevicesAddState } from './DevicesTypes.js';
 
 export const DevicesAdd = ({ Navegar }: NavegarProps) => {
   const [nombreEquipo, setNombreEquipo] =
@@ -171,10 +167,12 @@ export const DevicesAdd = ({ Navegar }: NavegarProps) => {
             Inputvalue={fecha}
             InputChange={(e) => setFecha(e.target.value.toString())}
           />
+          
         </Form.Group>
       <BtnAction btnlabel="Cancelar" btncolor="danger" action={Navegar} />
       <BtnAction btnlabel="Guardar" btncolor="success" action={agregarDatos} />
       </Form>
+
       { msg && <span>{msg}</span> }
     </>
   );

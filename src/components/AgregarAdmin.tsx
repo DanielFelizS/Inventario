@@ -18,7 +18,6 @@ const AgregarAdmin = ({MostrarModal, CerrarModal}: any) => {
       };
       const response = await api.post("/usuarios/add-Admin", USERNAME);
       const responseData = response.data;
-  
       if (responseData.isSucceed) {
         setData([...data, responseData]);
         setUsername("");
@@ -36,7 +35,6 @@ const AgregarAdmin = ({MostrarModal, CerrarModal}: any) => {
   
   return (
     <>
-
       <ModalUser
         ModalTitle={"Agregar admin"}
         RolChange={AddAdmin}
@@ -48,7 +46,6 @@ const AgregarAdmin = ({MostrarModal, CerrarModal}: any) => {
         }
       />
       { error && <span style={{color: "red"}}>{error}</span> }
-
     </>
   );
 };

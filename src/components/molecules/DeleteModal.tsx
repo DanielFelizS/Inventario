@@ -2,10 +2,9 @@ import { Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import BtnAction from "../atoms/Buttons/Button";
 import Paragraph from "../atoms/others/Paragraph";
-import { DeleteModalProps } from "../../types";
+import { DeleteModalProps } from "./MoleculesTypes";
 
 export const DeleteModal = ({ Navegar, Delete }: DeleteModalProps) => {
-
 
   return (
     <div className="modal show"

@@ -1,0 +1,40 @@
+#contenedor{
+    text-align: center;
+}
+#contcuadro{
+    width: 26%;
+    background-color: #5D5C78;
+    border: solid 3px #2F2F39;
+    display: inline-block;
+    margin: 25px;
+}
+#info, #contcuadro h2{
+    font-size: 18px;
+}
+#contimg{
+    padding: 16px 16px 0px 16px;
+}
+#contimg > img{
+    height: 80%;
+    width: 80%;
+    object-fit: cover;
+    border-radius: 5%;
+}
+#contredes{
+    align-items: center;
+    background-color: #2F2F39;
+    border-radius: 3px;
+    margin: auto 12px;
+}
+.titulos{
+    background-color: #2F2F39;
+    margin: 14px 12px;
+    color: white;
+    border-radius: 3px;
+    padding: 4px 0px;
+}
+.icons{
+    color: #fff;
+    font-size: 24px;
+    margin: 4px;
+}

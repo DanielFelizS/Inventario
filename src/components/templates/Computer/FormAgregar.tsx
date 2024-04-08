@@ -1,12 +1,9 @@
-import { useState, useEffect } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { Form } from "react-bootstrap";
-import BtnAction from "../../atoms/Buttons/Button.jsx";
-import InputDoble from "../../atoms/Inputs/InputCarac.jsx";
-import FormInput from "../../atoms/Inputs/InputText.jsx";
-import api from "../../../axiosData.mjs";
-import { useNavigate } from "react-router-dom";
-import { ComputerAddState, NavegarProps } from "../../../types.js";
+import {
+  useState, useEffect,
+  Form, BtnAction, InputDoble,
+  FormInput, api,useNavigate } from '../Dependencies.js';
+import { NavegarProps } from '../../../types.js';
+import { ComputerAddState } from "./Computertypes.js";
 
 export default function ComputerAdd ({ Navegar }: NavegarProps) {
 
@@ -21,7 +18,7 @@ export default function ComputerAdd ({ Navegar }: NavegarProps) {
   const [data, setData] = useState<ComputerAddState["ComputerData"]>([]);
   const [dispositivos, setDispositivos] = useState<any>([]);
   const [error, setError] = useState("");
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
 
   const handleChangeSearch = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -88,7 +85,6 @@ export default function ComputerAdd ({ Navegar }: NavegarProps) {
     navigate("/Computer");
   };
 
-  // Función para manejar cuando el usuario selecciona un departamento
   const handleDispositivoChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const id = e.target.value;
     setIdEquipo(id);
@@ -102,12 +98,12 @@ export default function ComputerAdd ({ Navegar }: NavegarProps) {
           <label>Equipo</label>
           <br />
           <input type="text" value={search} onChange={handleChangeSearch} />
-
+          <br />
           <select value={idEquipo} onChange={handleDispositivoChange} className="SelectData">
-            <option disabled>ID, dato buscado</option>
+            <option>ID, dato buscado</option>
             {dispositivos.map((dispositivo: any) => {
               if (dispositivo.nombre_equipo === "CPU" || dispositivo.nombre_equipo === "Laptop") {
-               return <option key={dispositivo.id} value={dispositivo.id}>{dispositivo.id}, {search}</option>;
+                return <option key={dispositivo.id} value={dispositivo.id}>{dispositivo.id}, {search}</option>;
               }
             })}
           </select>

@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { Form } from "react-bootstrap";
-import FormInput from "../../atoms/Inputs/InputText.jsx";
-import api from "../../../axiosData.mjs";
-import BtnAction from "../../atoms/Buttons/Button.js";
-import { useParams, useNavigate } from "react-router-dom";
-import { CerrarProps, UserEditState } from "../../../types.js";
+import {
+  useState, useEffect,
+  Form, BtnAction,
+  FormInput, api,useNavigate, useParams } from '../Dependencies.js';
+import { CerrarProps } from "../../../types.js";
+import { UserEditState } from "./UserTypes.js";
 
 export const UserEdit = ({ btnCerrar }: CerrarProps) => {
   const [edit, setEdit] = useState<UserEditState>({

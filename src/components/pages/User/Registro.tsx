@@ -1,19 +1,19 @@
-import FormInput from "../atoms/Inputs/InputText";
-import BtnAction from "../atoms/Buttons/Button";
-import InputDoble from "../atoms/Inputs/InputCarac";
+import FormInput from "../../atoms/Inputs/InputText";
+import BtnAction from "../../atoms/Buttons/Button";
+import InputDoble from "../../atoms/Inputs/InputCarac";
 import { Form, Modal } from "react-bootstrap";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import api from "../../axiosData.mts";
+import api from "../../../axiosData.mts";
+import { RegisterData } from "./Usertypes";
 
 export default function Registro() {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
-  const [data, setData] = useState<any>([]);
-  const [dataRoles, setDataRoles] = useState<any>([]);
+  const [firstName, setFirstName] = useState<RegisterData["FirstName"]>("");
+  const [lastName, setLastName] = useState<RegisterData["LastName"]>("");
+  const [username, setUsername] = useState<RegisterData["userName"]>("");
+  const [password, setPassword] = useState<RegisterData["password"]>("");
+  const [email, setEmail] = useState<RegisterData["Email"]>("");
+  const [data, setData] = useState<RegisterData["data"]>([]);
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
@@ -32,7 +32,7 @@ export default function Registro() {
       if (sendData.isSucceed) {
         setData([...data, sendData]);
         alert("El usuario ha sido registrado correctamente");
-        navigate("/Dispositivo");
+        navigate("/Inicio");
       } else {
         setError(sendData.message);
       }
@@ -42,15 +42,6 @@ export default function Registro() {
     }
   };
 
-  const GetRoles = async () => {
-    const SendRoles = await api.post("/usuarios/seed-roles");
-    setDataRoles([...dataRoles, SendRoles.data]);
-    // console.log("Roles activados");
-  };
-
-  useEffect(() => {
-    GetRoles();
-  }, []);
 
   return (
     <div className="modal show login">

@@ -1,6 +1,4 @@
-import "bootstrap/dist/css/bootstrap.min.css";
-import ComputerAdd from "../templates/Computer/FormAgregar";
-import { useNavigate } from "react-router-dom";
+import { ComputerAdd, useNavigate } from "../../Page";
 
 const AgregarComputer = () => {
   const navigate = useNavigate();

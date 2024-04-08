@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from "react";
-import BtnAction from "../../atoms/Buttons/Button.jsx";
-import { Form } from "react-bootstrap";
-import InputDoble from "../../atoms/Inputs/InputCarac.jsx";
-import FormInput from "../../atoms/Inputs/InputText.jsx";
-import api from "../../../axiosData.mjs";
-import { useParams, useNavigate } from "react-router-dom";
-import { CerrarProps, ComputerEditState } from "../../../types.js";
+import {
+  useState, useEffect,
+  Form, BtnAction, InputDoble,
+  FormInput, api,useNavigate, useParams } from '../Dependencies.js';
+import { ComputerEditState } from "./Computertypes.js";
+import { CerrarProps } from "../../../types.js";
 
 export const ComputerEdit = ({ btnCerrar }: CerrarProps) => {
   const [edit, setEdit] = useState<ComputerEditState>({
@@ -17,17 +15,52 @@ export const ComputerEdit = ({ btnCerrar }: CerrarProps) => {
     ventilador: "",
     fuentePoder: "",
     motherBoard: "",
-    tipo_MotherBoard: ""
+    tipo_MotherBoard: "",
   });
   const [dispositivos, setDispositivos] = useState<any>([]);
   const [error, setError] = useState("");
-  const { id } = useParams();
-  const navigate = useNavigate();
+  const [search, setSearch] = useState("");
 
-  useEffect(() => {
-    obtenerDispositivos();
-    obtenerDatos();
-  }, []);
+  const handleChangeSearch = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setSearch(value);
+    try {
+      const response = await api.get(
+        `/dispositivos/all/search?search=${value}`
+      );
+      if (Array.isArray(response.data)) {
+        setDispositivos(response.data);
+      } else {
+        setError("Los datos no son una lista (arrays)");
+        console.error(
+          "Error: la respuesta de la API no contiene un array",
+          response.data
+        );
+      }
+    } catch (error) {
+      setError("No se pudieron obtener los datos de los dispositivos");
+      console.error(error);
+    }
+  };
+  const obtenerBusqueda = async () => {
+    try {
+      const response = await api.get(
+        `/dispositivos/all/search?search=${search}`
+      );
+      if (Array.isArray(response.data)) {
+        setDispositivos(response.data);
+      } else {
+        setError("Los datos no son una lista (arrays)");
+        console.error(
+          "Error: la respuesta de la API no contiene un array",
+          response.data
+        );
+      }
+    } catch (error) {
+      setError("No se pudieron obtener los datos de los dispositivos");
+      console.error(error);
+    }
+  };
 
   const obtenerDispositivos = async () => {
     try {
@@ -79,29 +112,51 @@ export const ComputerEdit = ({ btnCerrar }: CerrarProps) => {
     }
   };
 
-        // Función para manejar cuando el usuario selecciona un departamento
-        const handleDispositivoChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-          const id = e.target.value;
-          setEdit((prevState) => ({
-            ...prevState,
-            equipo_Id: id,
-          }));
-        };
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  // Función para manejar cuando el usuario selecciona un departamento
+  const handleDispositivoChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const id = e.target.value;
+    setEdit((prevState) => ({
+      ...prevState,
+      equipo_Id: id,
+    }));
+  };
+  useEffect(() => {
+    obtenerDispositivos();
+    obtenerBusqueda();
+    obtenerDatos();
+  }, []);
+
   return (
     <>
       <Form className="FormData">
         <Form.Group className="mb-3" controlId="">
-        <label>Equipo</label>
+          <label>Equipo</label>
           <br />
-          <select value={edit.equipo_Id} onChange={handleDispositivoChange} className="SelectData">
-            <option disabled>ID, Modelo, Serial no.</option>
+          <input type="text" value={search} onChange={handleChangeSearch} />
+          <br />
+          <select
+            value={edit.equipo_Id}
+            onChange={handleDispositivoChange}
+            className="SelectData"
+          >
+            <option>ID, dato buscado</option>
             {dispositivos.map((dispositivo: any) => {
-              if (dispositivo.nombre_equipo === "CPU" || dispositivo.nombre_equipo === "Laptop") {
-                return <option key={dispositivo.id} value={dispositivo.id}>{dispositivo.id}, {dispositivo.modelo}, {dispositivo.serial_no}</option>;
+              if (
+                dispositivo.nombre_equipo === "CPU" ||
+                dispositivo.nombre_equipo === "Laptop"
+              ) {
+                return (
+                  <option key={dispositivo.id} value={dispositivo.id}>
+                    {dispositivo.id}, {search}
+                  </option>
+                );
               }
             })}
           </select>
-
+          <br />
           <InputDoble
             InputName="RAM y Disco duro"
             FirstValue={edit.ram}
@@ -128,7 +183,7 @@ export const ComputerEdit = ({ btnCerrar }: CerrarProps) => {
             InputTitle="Ventilador"
             InputType="text"
             InputName="ventilador"
-            Inputvalue={edit.ventilador} 
+            Inputvalue={edit.ventilador}
             InputChange={handleInputChange}
           />
 
@@ -136,7 +191,7 @@ export const ComputerEdit = ({ btnCerrar }: CerrarProps) => {
             InputTitle="Fuente de poder"
             InputType="text"
             InputName="fuentePoder"
-            Inputvalue={edit.fuentePoder} 
+            Inputvalue={edit.fuentePoder}
             InputChange={handleInputChange}
           />
 
@@ -168,7 +223,7 @@ export const ComputerEdit = ({ btnCerrar }: CerrarProps) => {
         </Form.Group>
       </Form>
 
-      { error && <span style={{color: "red"}}>{error}</span> }
+      {error && <span style={{ color: "red" }}>{error}</span>}
     </>
   );
 };

@@ -3,7 +3,8 @@ import api from "../../axiosData.mjs";
 import Pagination from "../molecules/Pagination.jsx";
 import Search from "../molecules/Search.js";
 import TableHead from "../atoms/table/TableHead.js";
-import { PropsTable } from "../../types.js";
+import { PropsTable } from "./TableTypes.js";
+import DataSpinner from "../atoms/others/Spinner.js";
 
 export const Table = ({ APIPath, APINames, EditarDatos, EliminarDatos, searchData, Header }: PropsTable) => {
 
@@ -37,7 +38,6 @@ export const Table = ({ APIPath, APINames, EditarDatos, EliminarDatos, searchDat
     setCurrentPage(data.selected + 1);
   };
 
-
   return (
     <>
       {load ? (
@@ -49,7 +49,7 @@ export const Table = ({ APIPath, APINames, EditarDatos, EliminarDatos, searchDat
           </table>
         </>
       ) : (
-        <h2>Consultando datos...</h2>
+        <DataSpinner/>
       )}
       <Pagination PageCount={pageCount} ActionPage={handlePageClick}/>
     </>

@@ -1,27 +1,27 @@
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 // import ProtectedRoute from './components/utils/ProtectedRouter';
-import HomePage from './components/pages/HomePage'
-import Login from './components/pages/Login';
-import Registro from './components/pages/Registro';
-import HomeDispositivos from './components/pages/HomeDispositivos';
-import HomeDepartamento from './components/pages/HomeDepartamento';
-import HomeComputer from './components/pages/HomePc';
-import HomeUsuario from './components/pages/HomeUsuario';
-import HomeAuditoria from './components/pages/HomeAuditoria';
+import Login from './components/pages/User/Login';
+import Registro from './components/pages/User/Registro';
+import { 
+  HomeDispositivos,
+  HomeDepartamento,
+  HomeComputer,
+  HomeUsuario,
+  HomeAuditoria,
+  HomePage,
+  AgregarDispositivo,
+  EditarDispositivo,
+  EliminarDispositvo,
+  AgregarDepartamento,
+  EditarDepartamento,
+  EliminarDepartamento,
+  AgregarComputer,
+  EditarComputer,
+  EliminarComputer,
+  EliminarUsuario,
+  EditarUsuario } from './components/pages/Page';
 
-import AgregarDispositivo from './components/pages/AgregarDispositivo';
-import EditarDispositivo from './components/pages/EditarDispositivo';
-import EliminarDispositvo from './components/pages/EliminarDispositvo';
-import AgregarDepartamento from './components/pages/AgregarDepartamento';
-import EditarDepartamento from './components/pages/EditarDepartamento';
-import EliminarDepartamento from './components/pages/EliminarDepartamento';
-import AgregarComputer from './components/pages/AgregarPc';
-import EditarComputer from './components/pages/EditarPc';
-import EliminarComputer from './components/pages/EliminarPc';
-
-import EliminarUsuario from './components/pages/EliminarUsuario';
-import EditarUsuario from './components/pages/EditarUsuario';
 // import { useLocalStorage } from 'react-use';
 import Navbar from './components/molecules/Navbar';
 
@@ -39,13 +39,13 @@ export const App = () => {
   return (
     <>
       <Routes>
-      {/* <Route element={<ProtectedRoute canActivate={user} redirectPath='/Login' />}> */}
-      <Route path="/Usuarios" element={<HomeUsuario />} />
-      <Route path="/Dispositivo" element={<HomeDispositivos />} />
-        <Route path="/Departamentos" element={<HomeDepartamento />} />
-        <Route path="/Computer" element={<HomeComputer />} />
-        <Route path="/Historial" element={<HomeAuditoria />} />
-      {/* </Route> */}
+        {/* <Route element={<ProtectedRoute canActivate={user} redirectPath='/Login' />}>
+        <Route path="/Usuarios" element={<HomeUsuario />} />
+        <Route path="/Dispositivo" element={<HomeDispositivos />} />
+          <Route path="/Departamentos" element={<HomeDepartamento />} />
+          <Route path="/Computer" element={<HomeComputer />} />
+          <Route path="/Historial" element={<HomeAuditoria />} />
+        </Route> */}
 
         {/* Navegaciones principales */}
         <Route path="/Login" element={<Login />} />
@@ -59,6 +59,9 @@ export const App = () => {
         <Route path="/Dispositivo" element={<HomeDispositivos />} />
         <Route path="/Departamentos" element={<HomeDepartamento />} />
         <Route path="/Computer" element={<HomeComputer />} />
+        <Route path="/Usuarios" element={<HomeUsuario />} />
+        <Route path="/Historial" element={<HomeAuditoria />} />
+
 
         {/* Dispositivo */}
         <Route path="/AgregarDispositivo" element={<AgregarDispositivo />} />

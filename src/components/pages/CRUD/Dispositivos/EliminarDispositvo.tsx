@@ -1,8 +1,8 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
-import api from "../../axiosData.mjs";
+import api from "../../../../axiosData.mjs";
 import { useNavigate, useParams } from "react-router-dom";
-import DeleteModal from "../molecules/DeleteModal";
+import DeleteModal from "../../../molecules/DeleteModal";
 
 export const EliminarDispositvo = () => {
   const [data, setData] = useState<any>("");

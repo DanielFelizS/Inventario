@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { Form } from "react-bootstrap";
-import FormInput from "../../atoms/Inputs/InputText.jsx";
-import api from "../../../axiosData.mjs";
-import BtnAction from "../../atoms/Buttons/Button.js";
-import { useParams, useNavigate } from "react-router-dom";
-import { CerrarProps, DepartamentEditState } from "../../../types.js";
+import {
+  useState, useEffect,
+  Form, BtnAction,
+  FormInput, api,useNavigate, useParams } from '../Dependencies.js';
+import { DepartamentEditState } from "./DepartmentTypes";
+import { CerrarProps } from "../../../types.js";
 
 export const DepartmentEdit = ({ btnCerrar }: CerrarProps) => {
   const [edit, setEdit] = useState<DepartamentEditState>({
@@ -15,11 +14,9 @@ export const DepartmentEdit = ({ btnCerrar }: CerrarProps) => {
     encargado: ""
   });
   const [error, setError] = useState("");
-
   const { id } = useParams();
-
   const navigate = useNavigate();
-
+  
   useEffect(() => {
     obtenerDatos();
   }, []);

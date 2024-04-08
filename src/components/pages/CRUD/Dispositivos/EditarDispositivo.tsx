@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import DevicesEdit from "../templates/Dispositivos/FormEditar";
+import DevicesEdit from "../../../templates/Dispositivos/FormEditar";
 import { useNavigate } from "react-router-dom";
 
 export const EditarDispositivo = () => {

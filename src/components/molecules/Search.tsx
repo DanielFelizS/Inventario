@@ -1,17 +1,6 @@
 import dayjs from "dayjs";
 import TableButtons from "./table/TableButtons";
-
-export type DataType = {
-  [key: string]: any;
-};
-
-export type SearchProps<T extends DataType> = {
-  DataFilter: T[];
-  search: string;
-  columnNames: string[];
-  EditarPath: string;
-  EliminarPath: string;
-};
+import { SearchProps, DataType } from "../../types";
 
 const Search = <T extends DataType>({
   DataFilter,
