@@ -72,7 +72,7 @@ export const HomeDispositivos = () => {
 
   const navigate = useNavigate();
   const handleNavigate = () => {
-    navigate("/AgregarDispositivo");
+    navigate("/agregarDispositivo");
   };
   const Datos = ['id', 'nombre_equipo', 'marca', 'modelo', 'estado', 'serial_no', 'cod_inventario', 'bienes_nacionales', 'fecha_modificacion', 'propietario_equipo', 'nombre_departamento'];
 
@@ -95,7 +95,7 @@ export const HomeDispositivos = () => {
       { msg && <span style={{color:"red"}}>{msg}</span> }
 
       <br />
-      <Table APIPath='dispositivos' APINames={Datos} EditarDatos={'EditarDispositivo'} EliminarDatos={'EliminarDispositivos'} searchData={search} Header={Headers}/>
+      <Table APIPath='dispositivos' APINames={Datos} EditarDatos={'editarDispositivo'} EliminarDatos={'eliminarDispositivo'} searchData={search} Header={Headers}/>
       <br/>
       <BtnAction btncolor='success' action={Reporte} btnlabel='Generar reporte'/>
       <BtnAction btncolor='success' action={ExportarExcel} btnlabel='Exportar excel'/>

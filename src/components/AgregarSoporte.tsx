@@ -36,7 +36,6 @@ const AgregarSoporte = ({ MostrarModal, CerrarModal }: any) => {
   
   return (
     <>
-
       <ModalUser
         ModalTitle={"Agregar Soporte"}
         RolChange={AddSoporte}
@@ -48,7 +47,6 @@ const AgregarSoporte = ({ MostrarModal, CerrarModal }: any) => {
         }
       />
       { error && <span style={{color: "red"}}>{error}</span> }
-
     </>
   );
 };

@@ -1,4 +1,4 @@
-import { PaginationProps } from "../../types";
+import { PaginationProps } from "./types";
 import ReactPaginate from "react-paginate";
 
 export const Pagination = ({ PageCount, ActionPage }: PaginationProps) => {

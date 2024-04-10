@@ -20,7 +20,7 @@ export const HomeDepartamento = () => {
 
   const navigate = useNavigate();
   const handleNavigate = () => {
-    navigate("/AgregarDepartamento");
+    navigate("/agregarDepartamento");
   };
 
   const Reporte = async () => {
@@ -93,7 +93,7 @@ export const HomeDepartamento = () => {
       {/* { progress.started && <progress max="100" value={progress.bar}></progress> } */}
       { msg && <span style={{color:"red"}}>{msg}</span> }
       <br />
-      <Table APIPath='departamento' APINames= {Datos} EditarDatos={'EditarDepartamento'} EliminarDatos={'EliminarDepartamento'} searchData={search} Header={Headers}/>
+      <Table APIPath='departamento' APINames= {Datos} EditarDatos={'editarDepartamento'} EliminarDatos={'eliminarDepartamento'} searchData={search} Header={Headers}/>
       <br />
       <BtnAction btncolor='success' action={Reporte} btnlabel='Generar reporte'/>
       <BtnAction btncolor='success' action={ExportarExcel} btnlabel='Exportar a excel'/> 

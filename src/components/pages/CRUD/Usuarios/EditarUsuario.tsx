@@ -8,7 +8,7 @@ export const EditarUsuario = () => {
 
   const navigate = useNavigate();
   const NavigateHome = () => {
-    navigate("/Usuarios");
+    navigate("/usuarios");
   }
 
   return (

@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
-import TableButtons from "./table/TableButtons";
-import { SearchProps, DataType } from "../../types";
+import TableButtons from "../table/TableButtons";
+import { SearchProps, DataType } from './types';
 
 const Search = <T extends DataType>({
   DataFilter,
@@ -26,8 +26,8 @@ const Search = <T extends DataType>({
             {columnNames.map(columnName => {
               return (
                 <td key={columnName}>
-                  {columnName === "fecha_modificacion" ||
-                  columnName === "fecha_creacion" || columnName === "fecha"
+                  {columnName === "fecha_modificacion" || columnName === "fecha_creacion" || 
+                  columnName === "fecha"
                     ? dayjs(item[columnName]).format("DD/MM/YYYY")
                     : item[columnName]}
                 </td>

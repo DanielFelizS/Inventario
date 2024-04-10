@@ -1,8 +1,8 @@
 import { Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import BtnAction from "../atoms/Buttons/Button";
-import Paragraph from "../atoms/others/Paragraph";
-import { DeleteModalProps } from "./MoleculesTypes";
+import BtnAction from "../../atoms/Buttons/Button";
+import Paragraph from "../../atoms/others/Paragraph";
+import { DeleteModalProps } from "./types";
 
 export const DeleteUser = ({ Navegar, Delete }: DeleteModalProps) => {
 

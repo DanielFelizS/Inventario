@@ -105,7 +105,7 @@ export const ComputerEdit = ({ btnCerrar }: CerrarProps) => {
       const response = await api.put(`/computer/${edit.id}`, edit);
       alert(response.data);
       btnCerrar();
-      navigate("/Computer");
+      navigate("/computer");
     } catch (error) {
       setError("Ocurrió un error al editar la computadora");
       console.log(error);

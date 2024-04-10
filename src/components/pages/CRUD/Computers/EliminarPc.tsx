@@ -5,7 +5,7 @@ export const EliminarComputer = () => {
 
   const navigate = useNavigate();
   const NavigateHome = () => {
-    navigate("/Computer");
+    navigate("/computer");
   };
 
   const { id } = useParams();

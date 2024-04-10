@@ -6,19 +6,14 @@ import { NavegarProps } from '../../../types.js';
 import { DevicesAddState } from './DevicesTypes.js';
 
 export const DevicesAdd = ({ Navegar }: NavegarProps) => {
-  const [nombreEquipo, setNombreEquipo] =
-    useState<DevicesAddState["nombreEquipo"]>("");
+  const [nombreEquipo, setNombreEquipo] = useState<DevicesAddState["nombreEquipo"]>("");
   const [marca, setMarca] = useState<DevicesAddState["marca"]>("");
   const [modelo, setModelo] = useState<DevicesAddState["modelo"]>("");
   const [noSerie, setNoSerie] = useState<DevicesAddState["noSerie"]>("");
-  const [inventario, setInventario] =
-    useState<DevicesAddState["inventario"]>("");
-  const [bienesNacionales, setBienesNacionales] =
-    useState<DevicesAddState["bienesNacionales"]>(0);
-  const [propietario, setPropietario] =
-    useState<DevicesAddState["propietario"]>("");
-  const [departamentoId, setDepartamentoId] =
-    useState<DevicesAddState["departamentoId"]>();
+  const [inventario, setInventario] = useState<DevicesAddState["inventario"]>("");
+  const [bienesNacionales, setBienesNacionales] = useState<DevicesAddState["bienesNacionales"]>(0);
+  const [propietario, setPropietario] = useState<DevicesAddState["propietario"]>("");
+  const [departamentoId, setDepartamentoId] = useState<DevicesAddState["departamentoId"]>();
   const [estado, setEstado] = useState<DevicesAddState["estado"]>("");
   const [fecha, setFecha] = useState<DevicesAddState["fecha"]>("");
   const [data, setData] = useState<DevicesAddState["data"]>([]);
@@ -73,7 +68,7 @@ export const DevicesAdd = ({ Navegar }: NavegarProps) => {
 
   const navigate = useNavigate();
   const handleNavigate = () => {
-    navigate("/Dispositivo");
+    navigate("/dispositivos");
   };
 
   // Función para manejar cuando el usuario selecciona un departamento

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import api from "../../../axiosData.mjs";
 import { useParams } from "react-router-dom";
-import { ParagraphProps } from "../../../types";
+import { ParagraphProps } from "./types";
 
 const Paragraph = ({TextParagraph, ValueParagraph, APIUrl}: ParagraphProps) => {
 

@@ -1,6 +1,7 @@
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import FormInput from "../Inputs/InputText";
+import { ModalProps } from "./types";
 
 function ModalUser({
   CloseModal,
@@ -9,7 +10,7 @@ function ModalUser({
   RolChange,
   ModalValue,
   ModalChange
-}: any) {
+}: ModalProps) {
   return (
     <Modal show={ModalShow} onHide={CloseModal}>
       <Modal.Header closeButton>

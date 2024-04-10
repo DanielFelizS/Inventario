@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
-import { btnProps } from "../../../types";
+import { btnProps } from "./types";
 
 export const BtnAction = ({ action, btnlabel, btncolor }: btnProps) => {
   return (

@@ -5,8 +5,8 @@ import { saveAs } from 'file-saver';
 import api from '../../axiosData.mts';
 import InputBusqueda from '../atoms/Inputs/InputBusqueda';
 import { useState } from 'react';
-import Navigation from '../molecules/Navbar';
-import DeleteComputer from '../molecules/DeletePc';
+import Navigation from '../molecules/Navbar/Navbar';
+import DeleteComputer from '../molecules/modal/DeletePc';
 import ComputerEdit from "../templates/Computer/FormEditar";
 import ComputerAdd from "../templates/Computer/FormAgregar";
 

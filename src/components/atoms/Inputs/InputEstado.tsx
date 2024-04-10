@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import Form from "react-bootstrap/Form";
-import { SelectFormProps } from "../../../types";
+import { SelectFormProps } from "./types";
 
 export const SelectForm = ({
   Inputvalue,

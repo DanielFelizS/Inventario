@@ -8,7 +8,7 @@ export const EditarDispositivo = () => {
 
   const navigate = useNavigate();
   const NavigateHome = () => {
-    navigate("/Dispositivo");
+    navigate("/dispositivos");
   }
 
   return (

@@ -5,7 +5,7 @@ export const EditarComputer = () => {
 
   const navigate = useNavigate();
   const NavigateHome = () => {
-    navigate("/Computer");
+    navigate("/computer");
   }
 
   return (

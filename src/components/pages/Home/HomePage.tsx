@@ -1,4 +1,4 @@
-import Navigation from "../../molecules/Navbar";
+import Navigation from "../../molecules/Navbar/Navbar";
 import Pasantes from "../../Pasantes";
 
 export default function HomePage() {

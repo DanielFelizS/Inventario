@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Form, InputGroup } from "react-bootstrap";
-import { InputDobleProps } from "../../../types";
+import { InputDobleProps } from "./types";
 export const InputDoble = ({
   InputName,
   FirstValue,

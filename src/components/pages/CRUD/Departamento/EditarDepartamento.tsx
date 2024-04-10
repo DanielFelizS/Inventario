@@ -8,7 +8,7 @@ export const EditarDepartamento = () => {
 
   const navigate = useNavigate();
   const NavigateHome = () => {
-    navigate("/Departamentos");
+    navigate("/departamentos");
   }
 
   return (

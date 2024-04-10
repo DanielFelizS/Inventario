@@ -49,7 +49,7 @@ export const UserEdit = ({ btnCerrar }: CerrarProps) => {
       // console.log(response.data);
       alert(response.data);
       btnCerrar();
-      navigate("/Usuarios");
+      navigate("/usuarios");
     }
     catch (error) {
       setError("Ocurrió un error al editar el usuario");

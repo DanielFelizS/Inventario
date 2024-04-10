@@ -50,7 +50,7 @@ export const DepartmentEdit = ({ btnCerrar }: CerrarProps) => {
       // console.log(response.data);
       alert(response.data);
       btnCerrar();
-      navigate("/Departamentos");
+      navigate("/departamentos");
     } catch (error) {
       setError("Ocurrió un error al editar el departamento");
       console.log(error);

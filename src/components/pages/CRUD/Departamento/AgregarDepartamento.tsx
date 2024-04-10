@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const AgregarDepartamento = () => {
   const navigate = useNavigate();
   const handleNavigate = () => {
-    navigate("/Departamentos");
+    navigate("/departamentos");
   }
 
   return (

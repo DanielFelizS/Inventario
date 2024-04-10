@@ -75,7 +75,7 @@ export const DevicesEdit = ({ btnCerrar }: CerrarProps) => {
       const response = await api.put(`/dispositivos/${edit.id}`, edit);
       alert(response.data);
       btnCerrar();
-      navigate("/Dispositivo");
+      navigate("/dispositivos");
     } catch (error) {
       setError("Ocurrió un error al editar el dispositivo");
       console.error(error);

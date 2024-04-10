@@ -23,7 +23,7 @@ import {
   EditarUsuario } from './components/pages/Page';
 
 // import { useLocalStorage } from 'react-use';
-import Navbar from './components/molecules/Navbar';
+import Navbar from './components/molecules/Navbar/Navbar';
 
 export const App = () => {
   // const [user, setUser] = useLocalStorage('token');
@@ -32,55 +32,46 @@ export const App = () => {
 
   useEffect(() => {
     if (location.pathname == '/') {
-      navigate('/Login');
+      navigate('/login');
     }
   }, [navigate, location]);
 
   return (
     <>
       <Routes>
-        {/* <Route element={<ProtectedRoute canActivate={user} redirectPath='/Login' />}>
-        <Route path="/Usuarios" element={<HomeUsuario />} />
-        <Route path="/Dispositivo" element={<HomeDispositivos />} />
-          <Route path="/Departamentos" element={<HomeDepartamento />} />
-          <Route path="/Computer" element={<HomeComputer />} />
-          <Route path="/Historial" element={<HomeAuditoria />} />
-        </Route> */}
 
         {/* Navegaciones principales */}
-        <Route path="/Login" element={<Login />} />
+        <Route path="/login" element={<Login />} />
 
-        {/* <Route path="/Login" render={()=> {
-        return user ? null : <Login />
-        }}/> */}
+        {/* <Route path="/Departamentos" element={user ? <HomeDepartamento /> : <Navigate to="/Login" />} /> */}
 
-        <Route path="/Registro" element={<Registro />} />
-        <Route path="/Inicio" element={<HomePage />} />
-        <Route path="/Dispositivo" element={<HomeDispositivos />} />
-        <Route path="/Departamentos" element={<HomeDepartamento />} />
-        <Route path="/Computer" element={<HomeComputer />} />
-        <Route path="/Usuarios" element={<HomeUsuario />} />
-        <Route path="/Historial" element={<HomeAuditoria />} />
+        <Route path="/registro" element={<Registro />} />
+        <Route path="/inicio" element={<HomePage />} />
+        <Route path="/dispositivos" element={<HomeDispositivos />} />
+        <Route path="/departamentos" element={<HomeDepartamento />} />
+        <Route path="/computer" element={<HomeComputer />} />
+        <Route path="/usuarios" element={<HomeUsuario />} />
+        <Route path="/historial" element={<HomeAuditoria />} />
 
 
         {/* Dispositivo */}
-        <Route path="/AgregarDispositivo" element={<AgregarDispositivo />} />
-        <Route path="/EditarDispositivo/:id" element={<EditarDispositivo />} />
-        <Route path="/EliminarDispositivos/:id" element={<EliminarDispositvo />} />
+        <Route path="/agregarDispositivo" element={<AgregarDispositivo />} />
+        <Route path="/editarDispositivo/:id" element={<EditarDispositivo />} />
+        <Route path="/eliminarDispositivo/:id" element={<EliminarDispositvo />} />
 
         {/* Departamento */}
-        <Route path="/AgregarDepartamento" element={<AgregarDepartamento />} />
-        <Route path="/EditarDepartamento/:id" element={<EditarDepartamento />} />
-        <Route path="/EliminarDepartamento/:id" element={<EliminarDepartamento />} />
+        <Route path="/agregarDepartamento" element={<AgregarDepartamento />} />
+        <Route path="/editarDepartamento/:id" element={<EditarDepartamento />} />
+        <Route path="/eliminarDepartamento/:id" element={<EliminarDepartamento />} />
 
         {/* Computer */}
-        <Route path="/AgregarPc" element={<AgregarComputer />} />
-        <Route path="/EditarPc/:id" element={<EditarComputer />} />
-        <Route path="/EliminarPc/:id" element={<EliminarComputer />} />
+        <Route path="/agregarPc" element={<AgregarComputer />} />
+        <Route path="/editarPc/:id" element={<EditarComputer />} />
+        <Route path="/eliminarPc/:id" element={<EliminarComputer />} />
 
         {/* Usuario */}
-        <Route path="/EditarUsuario/:id" element={<EditarUsuario />} />
-        <Route path="/EliminarUsuario/:id" element={<EliminarUsuario />} />
+        <Route path="/editarUsuario/:id" element={<EditarUsuario />} />
+        <Route path="/eliminarUsuario/:id" element={<EliminarUsuario />} />
 
         {/* Otros */}
         <Route path="/" element={<Navbar />} />

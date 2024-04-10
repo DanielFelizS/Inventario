@@ -1,4 +1,4 @@
-import { InputSearch } from "../../../types";
+import { InputSearch } from './types'
 
 export const InputBusqueda = ({ EventSearch, SearchValue }: InputSearch) => {
   return (

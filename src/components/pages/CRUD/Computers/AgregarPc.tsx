@@ -3,7 +3,7 @@ import { ComputerAdd, useNavigate } from "../../Page";
 const AgregarComputer = () => {
   const navigate = useNavigate();
   const handleNavigate = () => {
-    navigate("/Computer");
+    navigate("/computer");
   }
 
   return (

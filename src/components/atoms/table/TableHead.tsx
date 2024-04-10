@@ -1,6 +1,5 @@
 
-export const TableHead = ({ HeadPath }: { HeadPath: string[] }) => {
-
+export default function TableHead ({ HeadPath }: { HeadPath: string[] }) {
   return (
     <thead>
       <tr>
@@ -12,5 +11,3 @@ export const TableHead = ({ HeadPath }: { HeadPath: string[] }) => {
     </thead>
   );
 };
-
-export default TableHead;

@@ -2,14 +2,14 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
 import api from "../../../../axiosData.mjs";
 import { useNavigate, useParams } from "react-router-dom";
-import DeleteDepartamento from "../../../molecules/DeleteDepartamento";
+import DeleteDepartamento from "../../../molecules/modal/DeleteDepartamento";
 
 export const EliminarDepartamento = () => {
   const [data, setData] = useState<any>("");
 
   const navigate = useNavigate();
   const NavigateHome = () => {
-    navigate("/Departamentos");
+    navigate("/departamentos");
   };
 
   const { id } = useParams();

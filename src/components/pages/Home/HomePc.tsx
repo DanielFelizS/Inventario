@@ -20,7 +20,7 @@ export default function HomeComputer () {
 
   const navigate = useNavigate();
   const handleNavigate = () => {
-    navigate("/AgregarPc");
+    navigate("/agregarPc");
   };
   
   const Reporte = async () => {

@@ -6,7 +6,6 @@ export const LoginAction = async (credentials: any) => {
     return data;
   } catch (error) {
     throw new Error("Error en la solicitud de inicio de sesión");
-
   }
 };
 

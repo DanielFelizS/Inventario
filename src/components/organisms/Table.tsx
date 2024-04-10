@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import api from "../../axiosData.mjs";
-import Pagination from "../molecules/Pagination.jsx";
-import Search from "../molecules/Search.js";
+import Pagination from "../molecules/pagination/Pagination.js";
+import Search from "../molecules/search/Search.js";
 import TableHead from "../atoms/table/TableHead.js";
 import { PropsTable } from "./TableTypes.js";
 import DataSpinner from "../atoms/others/Spinner.js";

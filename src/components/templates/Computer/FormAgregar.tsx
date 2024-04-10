@@ -82,7 +82,7 @@ export default function ComputerAdd ({ Navegar }: NavegarProps) {
 
   const navigate = useNavigate();
   const handleNavigate = () => {
-    navigate("/Computer");
+    navigate("/computer");
   };
 
   const handleDispositivoChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
