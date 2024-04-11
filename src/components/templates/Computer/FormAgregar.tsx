@@ -1,9 +1,9 @@
 import {
-  useState, useEffect,
-  Form, BtnAction, InputDoble,
-  FormInput, api,useNavigate } from '../Dependencies.js';
+  useState, Form, BtnAction, InputDoble, FormInput } from '../Dependencies.js';
 import { NavegarProps } from '../../../types.js';
 import { ComputerAddState } from "./Computertypes.js";
+import useGet from '../../utils/CustomHooks/useGet.js';
+import usePost from '../../utils/CustomHooks/usePost.js';
 
 export default function ComputerAdd ({ Navegar }: NavegarProps) {
 
@@ -15,48 +15,17 @@ export default function ComputerAdd ({ Navegar }: NavegarProps) {
   const [fuentePoder, setFuentePoder] = useState<ComputerAddState["fuentePoder"]>("");
   const [motherBoard, setMotherBoard] = useState<ComputerAddState["motherBoard"]>("");
   const [tipoMotherBoard, setTipoMotherBoard] = useState<ComputerAddState["tipo_MotherBoard"]>("");
-  const [data, setData] = useState<ComputerAddState["ComputerData"]>([]);
-  const [dispositivos, setDispositivos] = useState<any>([]);
-  const [error, setError] = useState("");
   const [search, setSearch] = useState("");
+
+  const {dispositivos} = useGet({url: `/dispositivos/all/search?search=${search}`})
+  const { msg, agregarDatos } = usePost("computer");
 
   const handleChangeSearch = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setSearch(value);
-    try {
-      const response = await api.get(`/dispositivos/all/search?search=${value}`);
-      if (Array.isArray(response.data)) {
-        setDispositivos(response.data);
-      } else {
-        setError("Los datos no son una lista (arrays)");
-        console.error('Error: la respuesta de la API no contiene un array', response.data);
-      }
-    } catch (error) {
-      setError("No se pudieron obtener los datos de los dispositivos");
-      console.error(error);
-    }
   };
 
-  useEffect(() => {
-    obtenerDatos();
-  }, []);
-
-  const obtenerDatos = async () => {
-    try {
-      const response = await api.get(`/dispositivos/all/search?search=${search}`);
-      if (Array.isArray(response.data)) {
-        setDispositivos(response.data);
-      } else {
-        setError("Los datos no son una lista (arrays)");
-        console.error('Error: la respuesta de la API no contiene un array', response.data);
-      }
-    } catch (error) {
-      setError("No se pudieron obtener los datos de los dispositivos");
-      console.error(error);
-    }
-  };
-
-  const agregarDatos = async () => {
+  const handleAgregarDatos = async () => {
     const postData = {
       equipo_Id: idEquipo,
       ram: ram,
@@ -67,23 +36,8 @@ export default function ComputerAdd ({ Navegar }: NavegarProps) {
       motherBoard: motherBoard,
       tipo_MotherBoard: tipoMotherBoard
     };
-
-    try {
-      const response = await api.post("/computer", postData);
-      setData([...data, response.data]);
-      console.log(idEquipo);
-      alert("Los datos se han agregado correctamente");
-      handleNavigate();
-    } catch (error) {
-      setError("No se pudieron agregar los datos del computador");
-      console.error(error);
+    agregarDatos(postData)
   }
-}
-
-  const navigate = useNavigate();
-  const handleNavigate = () => {
-    navigate("/computer");
-  };
 
   const handleDispositivoChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const id = e.target.value;
@@ -161,10 +115,10 @@ export default function ComputerAdd ({ Navegar }: NavegarProps) {
           />
         </Form.Group>
       <BtnAction btnlabel="Cancelar" btncolor="danger" action={Navegar} />
-      <BtnAction btnlabel="Guardar" btncolor="success" action={agregarDatos} />
+      <BtnAction btnlabel="Guardar" btncolor="success" action={handleAgregarDatos} />
       </Form>
 
-      { error && <span style={{color: "red"}}>{error}</span> }
+      { msg && <span style={{color: "red"}}>{msg}</span> }
     </>
   );
 };

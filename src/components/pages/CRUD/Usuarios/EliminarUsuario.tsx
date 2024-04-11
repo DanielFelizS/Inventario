@@ -1,30 +1,8 @@
-import "bootstrap/dist/css/bootstrap.min.css";
-import { useState } from "react";
-import api from "../../../../axiosData.mjs";
-import { useNavigate, useParams } from "react-router-dom";
+import useDelete from "../../../utils/CustomHooks/useDelete";
 import DeleteUser from "../../../molecules/modal/DeleteUser";
 export const EliminarUsuario = () => {
-  const [data, setData] = useState<any>("");
 
-  const navigate = useNavigate();
-  const NavigateHome = () => {
-    navigate("/usuarios");
-  };
-
-  const { id } = useParams();
-
-  const eliminarDatos = async () => {
-    const response = await api.delete(`/usuarios/${id}`, data);
-    if (response.status === 200) { 
-      setData("");
-      alert("Se ha eliminado el usuario correctamente");
-      NavigateHome();
-    } 
-    else if(response.status == 401) alert(`Usuario no autorizado`)
-    else alert(`Error al eliminar el usuario: ${response}`);
-    
-
-  };
+  const {eliminarDatos, NavigateHome} = useDelete("departamentos");
 
   return (
     <>

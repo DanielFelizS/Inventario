@@ -1,9 +1,11 @@
 import {
-  useState, useEffect, Form,
+  useState, Form,
   BtnAction, InputDoble, SelectForm,
-  FormInput, api, useNavigate } from '../Dependencies.js';
+  FormInput } from '../Dependencies.js';
 import { NavegarProps } from '../../../types.js';
 import { DevicesAddState } from './DevicesTypes.js';
+import useGet from '../../utils/CustomHooks/useGet.js';
+import usePost from '../../utils/CustomHooks/usePost.js';
 
 export const DevicesAdd = ({ Navegar }: NavegarProps) => {
   const [nombreEquipo, setNombreEquipo] = useState<DevicesAddState["nombreEquipo"]>("");
@@ -13,34 +15,15 @@ export const DevicesAdd = ({ Navegar }: NavegarProps) => {
   const [inventario, setInventario] = useState<DevicesAddState["inventario"]>("");
   const [bienesNacionales, setBienesNacionales] = useState<DevicesAddState["bienesNacionales"]>(0);
   const [propietario, setPropietario] = useState<DevicesAddState["propietario"]>("");
+  const [nombreWindows, setNombreWindows] = useState<DevicesAddState["nombre_windows"]>("");
   const [departamentoId, setDepartamentoId] = useState<DevicesAddState["departamentoId"]>();
   const [estado, setEstado] = useState<DevicesAddState["estado"]>("");
   const [fecha, setFecha] = useState<DevicesAddState["fecha"]>("");
-  const [data, setData] = useState<DevicesAddState["data"]>([]);
-  const [departamentos, setDepartamentos] = useState<any>([]);
-  const [msg, setMsg] = useState("");
 
-  useEffect(() => {
-    obtenerDatos();
-  }, []);
+  const {departamentos} = useGet({ url: '/departamentos/all'})
+  const { msg, agregarDatos } = usePost("dispositivos");
 
-  const obtenerDatos = async () => {
-    try {
-      const response = await api.get(`/departamento/all`);
-      if (Array.isArray(response.data)) {
-        setDepartamentos(response.data);
-      } else {
-        console.error(
-          "Error: la respuesta de la API no contiene un array",
-          response.data
-        );
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const agregarDatos = async () => {
+  const handleAgregarDatos = async () => {
     const postData = {
       nombre_equipo: nombreEquipo,
       marca: marca,
@@ -49,32 +32,16 @@ export const DevicesAdd = ({ Navegar }: NavegarProps) => {
       cod_inventario: inventario,
       bienes_nacionales: bienesNacionales,
       propietario_equipo: propietario,
+      nombre_windows: nombreWindows,
       estado: estado,
       fecha_modificacion: fecha,
       departamentoId: departamentoId,
     };
-
-    try {
-      const response = await api.post("/dispositivos", postData);
-      setData([...data, response.data]);
-      console.log(departamentoId);
-      setMsg("Los datos se han agregado correctamente");
-      handleNavigate();
-    } catch (error) {
-      setMsg(`Error al agregar los datos`);
-      console.error(error);
-    }
-  };
-
-  const navigate = useNavigate();
-  const handleNavigate = () => {
-    navigate("/dispositivos");
+    agregarDatos(postData)
   };
 
   // Función para manejar cuando el usuario selecciona un departamento
-  const handleDepartamentoChange = (
-    e: React.ChangeEvent<HTMLSelectElement>
-  ) => {
+  const handleDepartamentoChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const id = e.target.value;
     setDepartamentoId(id);
   };
@@ -83,6 +50,7 @@ export const DevicesAdd = ({ Navegar }: NavegarProps) => {
     <>
       <Form className="FormData">
         <Form.Group className="mb-3" controlId="">
+          {/* Inputs */}
           <FormInput
             InputTitle="Nombre del equipo"
             InputType="text"
@@ -126,13 +94,20 @@ export const DevicesAdd = ({ Navegar }: NavegarProps) => {
             SecondPlaceholder="Bienes nacionales"
             SecondName="bienes_nacionales"
           />
-          <FormInput
-            InputTitle="Propietario del equipo"
-            InputType="text"
-            InputName="propietario"
-            Inputvalue={propietario}
-            InputChange={(e) => setPropietario(e.target.value)}
+          <InputDoble
+            InputName="Propietario del equipo y Nombre (usuario de windows)"
+            FirstValue={propietario}
+            FirstChange={(e) => setPropietario(e.target.value)}
+            FirstType="text"
+            FirstPlaceholder="Faustino Acevedo"
+            FirstName="propietario"
+            SecondValue={nombreWindows}
+            SecondChange={(e) => setNombreWindows(e.target.value)}
+            SecondType="text"
+            SecondPlaceholder="Filipino Perez"
+            SecondName="nombre_windows"
           />
+          {/* Departamento */}
           <br />
           <label>Departamento</label>
           <br />
@@ -146,6 +121,8 @@ export const DevicesAdd = ({ Navegar }: NavegarProps) => {
           </select>
 
           <br />
+
+          {/* Estado del equipo */}
           <SelectForm
             Inputvalue={estado}
             InputChange={(e) => setEstado(e.target.value)}
@@ -155,6 +132,7 @@ export const DevicesAdd = ({ Navegar }: NavegarProps) => {
             Select3="En reparación"
             Select4="Irreparable"
           />
+          {/* Input */}
           <FormInput
             InputTitle="Fecha de modificación"
             InputType="date"
@@ -162,10 +140,9 @@ export const DevicesAdd = ({ Navegar }: NavegarProps) => {
             Inputvalue={fecha}
             InputChange={(e) => setFecha(e.target.value.toString())}
           />
-          
         </Form.Group>
       <BtnAction btnlabel="Cancelar" btncolor="danger" action={Navegar} />
-      <BtnAction btnlabel="Guardar" btncolor="success" action={agregarDatos} />
+      <BtnAction btnlabel="Guardar" btncolor="success" action={handleAgregarDatos} />
       </Form>
 
       { msg && <span>{msg}</span> }

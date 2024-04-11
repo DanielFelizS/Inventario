@@ -1,9 +1,11 @@
 import {
   useState, useEffect, SelectForm,
   Form, BtnAction, InputDoble, FormInput, 
-  api,useNavigate, useParams } from '../Dependencies.js';
+  api, useParams } from '../Dependencies.js';
 import { CerrarProps } from "../../../types.js";
 import { DevicesEditState } from './DevicesTypes.js';
+import useGet from '../../utils/CustomHooks/useGet.js';
+import usePut from '../../utils/CustomHooks/usePut.js';
 
 export const DevicesEdit = ({ btnCerrar }: CerrarProps) => {
   const [edit, setEdit] = useState<DevicesEditState>({
@@ -15,33 +17,17 @@ export const DevicesEdit = ({ btnCerrar }: CerrarProps) => {
     cod_inventario: "",
     bienes_nacionales: 0,
     propietario_equipo: "",
+    nombre_windows: "",
     departamentoId: 0,
     estado: "",
     fecha_modificacion: "",
   });
-  const [departamentos, setDepartamentos] = useState<any>([]);
   const [error, setError] = useState("");
 
-  useEffect(() => {
-    ObtenerDepartameto();
-  }, []);
-
-  const ObtenerDepartameto = async () => {
-    try {
-      const request = await api.get(`/departamento/all`);
-      if (Array.isArray(request.data)) {
-        setDepartamentos(request.data);
-      } else {
-        console.error(error);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const {departamentos} = useGet({ url: `/departamentos/all`})
+  const {msg, editarDatos} = usePut({ url: `dispositivos`, PropEdit: edit})
 
   const { id } = useParams();
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     obtenerDatos();
@@ -50,7 +36,11 @@ export const DevicesEdit = ({ btnCerrar }: CerrarProps) => {
   const obtenerDatos = async () => {
     try {
       const response = await api.get(`/dispositivos/${id}`);
-      setEdit(response.data);
+      const fechaModificacion = response.data.fecha_modificacion.substring(0, 10); 
+      setEdit({
+      ...response.data,
+      fecha_modificacion: fechaModificacion,
+    })
     } catch (error) {
       setError("Error al consultarse los datos");
       console.error(error);
@@ -65,31 +55,15 @@ export const DevicesEdit = ({ btnCerrar }: CerrarProps) => {
     }));
   };
 
-  const editarDatos = async () => {
-    try {
-      if (!edit.id) {
-        setError("El ID del dispositivo es requerido");
-        console.error(error);
-      }
-
-      const response = await api.put(`/dispositivos/${edit.id}`, edit);
-      alert(response.data);
-      btnCerrar();
-      navigate("/dispositivos");
-    } catch (error) {
-      setError("Ocurrió un error al editar el dispositivo");
-      console.error(error);
-    }
-  };
-
-        // Función para manejar cuando el usuario selecciona un departamento
-        const handleDepartamentoChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-          const id = e.target.value;
-          setEdit((prevState) => ({
-            ...prevState,
-            departamentoId: id
-          }));
-        };
+      // Función para manejar cuando el usuario selecciona un departamento
+      const handleDepartamentoChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const id = e.target.value;
+        setEdit((prevState) => ({
+          ...prevState,
+          departamentoId: id
+        }));
+      };
+      
   return (
     <>
       <Form className="FormData">
@@ -138,14 +112,19 @@ export const DevicesEdit = ({ btnCerrar }: CerrarProps) => {
             SecondName="bienes_nacionales"
           />
 
-          <FormInput
-            InputTitle="Propietario del equipo"
-            InputType="text"
-            InputName="propietario_equipo"
-            Inputvalue={edit.propietario_equipo}
-            InputChange={handleInputChange}
-          />
-
+          <InputDoble
+            InputName="Propietario del equipo y Nombre (usuario de windows)"
+            FirstValue={edit.propietario_equipo}
+            FirstChange={handleInputChange}
+            FirstType="text"
+            FirstPlaceholder="Faustino Acevedo"
+            FirstName="propietario"
+            SecondValue={edit.nombre_windows}
+            SecondChange={handleInputChange}
+            SecondType="text"
+            SecondPlaceholder="Filipino Perez"
+            SecondName="nombre_windows"
+            />
           <br />
           <label>Departamento</label>
           <br />
@@ -191,6 +170,7 @@ export const DevicesEdit = ({ btnCerrar }: CerrarProps) => {
           />
         </Form.Group>
       </Form>
+      { msg && <span style={{color: "green"}}>{msg}</span> }
       { error && <span style={{color: "red"}}>{error}</span> }
     </>
   );

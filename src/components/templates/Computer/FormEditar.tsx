@@ -1,9 +1,11 @@
 import {
   useState, useEffect,
   Form, BtnAction, InputDoble,
-  FormInput, api,useNavigate, useParams } from '../Dependencies.js';
+  FormInput, api, useParams } from '../Dependencies.js';
 import { ComputerEditState } from "./Computertypes.js";
 import { CerrarProps } from "../../../types.js";
+import useGet from '../../utils/CustomHooks/useGet.js';
+import usePut from '../../utils/CustomHooks/usePut.js';
 
 export const ComputerEdit = ({ btnCerrar }: CerrarProps) => {
   const [edit, setEdit] = useState<ComputerEditState>({
@@ -17,65 +19,19 @@ export const ComputerEdit = ({ btnCerrar }: CerrarProps) => {
     motherBoard: "",
     tipo_MotherBoard: "",
   });
-  const [dispositivos, setDispositivos] = useState<any>([]);
   const [error, setError] = useState("");
   const [search, setSearch] = useState("");
 
+  const {dispositivos} = useGet({ url: `/dispositivos/all/search?search=${search}`})
+  // const {dispositivos} = useGet({ url: `/dispositivos/all`})
+  const {msg, editarDatos} = usePut({ url: `computer`, PropEdit: edit})
+  
+  const { id } = useParams();
+
   const handleChangeSearch = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setSearch(value);
-    try {
-      const response = await api.get(
-        `/dispositivos/all/search?search=${value}`
-      );
-      if (Array.isArray(response.data)) {
-        setDispositivos(response.data);
-      } else {
-        setError("Los datos no son una lista (arrays)");
-        console.error(
-          "Error: la respuesta de la API no contiene un array",
-          response.data
-        );
-      }
-    } catch (error) {
-      setError("No se pudieron obtener los datos de los dispositivos");
-      console.error(error);
-    }
-  };
-  const obtenerBusqueda = async () => {
-    try {
-      const response = await api.get(
-        `/dispositivos/all/search?search=${search}`
-      );
-      if (Array.isArray(response.data)) {
-        setDispositivos(response.data);
-      } else {
-        setError("Los datos no son una lista (arrays)");
-        console.error(
-          "Error: la respuesta de la API no contiene un array",
-          response.data
-        );
-      }
-    } catch (error) {
-      setError("No se pudieron obtener los datos de los dispositivos");
-      console.error(error);
-    }
+    setSearch(e.target.value);
   };
 
-  const obtenerDispositivos = async () => {
-    try {
-      const request = await api.get(`/dispositivos/all`);
-      if (Array.isArray(request.data)) {
-        setDispositivos(request.data);
-      } else {
-        setError("Los datos no son una lista (arrays)");
-        console.error(error);
-      }
-    } catch (error) {
-      setError("No se pudieron obtener los datos de los dispositivos");
-      console.error(error);
-    }
-  };
 
   const obtenerDatos = async () => {
     try {
@@ -95,25 +51,6 @@ export const ComputerEdit = ({ btnCerrar }: CerrarProps) => {
     }));
   };
 
-  const editarDatos = async () => {
-    try {
-      if (!edit.id) {
-        setError("El ID de la computadora es requerida");
-        console.log(error);
-      }
-
-      const response = await api.put(`/computer/${edit.id}`, edit);
-      alert(response.data);
-      btnCerrar();
-      navigate("/computer");
-    } catch (error) {
-      setError("Ocurrió un error al editar la computadora");
-      console.log(error);
-    }
-  };
-
-  const { id } = useParams();
-  const navigate = useNavigate();
 
   // Función para manejar cuando el usuario selecciona un departamento
   const handleDispositivoChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -124,8 +61,6 @@ export const ComputerEdit = ({ btnCerrar }: CerrarProps) => {
     }));
   };
   useEffect(() => {
-    obtenerDispositivos();
-    obtenerBusqueda();
     obtenerDatos();
   }, []);
 
@@ -223,6 +158,7 @@ export const ComputerEdit = ({ btnCerrar }: CerrarProps) => {
         </Form.Group>
       </Form>
 
+      {msg && <span style={{ color: "green" }}>{msg}</span>}
       {error && <span style={{ color: "red" }}>{error}</span>}
     </>
   );

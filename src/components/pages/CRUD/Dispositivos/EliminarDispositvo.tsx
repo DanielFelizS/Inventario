@@ -1,31 +1,9 @@
-import "bootstrap/dist/css/bootstrap.min.css";
-import { useState } from "react";
-import api from "../../../../axiosData.mjs";
-import { useNavigate, useParams } from "react-router-dom";
+import useDelete from "../../../utils/CustomHooks/useDelete";
 import DeleteModal from "../../../molecules/modal/DeleteModal";
 
 export const EliminarDispositvo = () => {
-  const [data, setData] = useState<any>("");
 
-  const navigate = useNavigate();
-  const NavigateHome = () => {
-    navigate("/dispositivos");
-  };
-
-  const { id } = useParams();
-
-  const eliminarDatos = async () => {
-    const response = await api.delete(`/dispositivos/${id}`, data);
-    if (response.status === 200) { 
-      setData("");
-      alert("Se ha eliminado el dispositivo correctamente");
-      NavigateHome();
-    } 
-    else if(response.status == 401) alert(`Usuario no autorizado`)
-    else alert(`Error al eliminar el dispositivo: ${response}`);
-    
-
-  };
+  const {eliminarDatos, NavigateHome} = useDelete("dispositivos")
 
   return (
     <>

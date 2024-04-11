@@ -1,27 +1,9 @@
-import { DeleteComputer, useNavigate, useParams, useState, api } from "../../Page";
+import { DeleteComputer } from "../../Page";
+import useDelete from "../../../utils/CustomHooks/useDelete";
 
 export const EliminarComputer = () => {
-  const [data, setData] = useState<any>("");
-
-  const navigate = useNavigate();
-  const NavigateHome = () => {
-    navigate("/computer");
-  };
-
-  const { id } = useParams();
-
-  const eliminarDatos = async () => {
-    const response = await api.delete(`/computer/${id}`, data);
-    if (response.status === 200) { 
-      setData("");
-      alert("Se ha eliminado el dispositivo correctamente");
-      NavigateHome();
-    } 
-    else if(response.status == 401) alert(`Usuario no autorizado`)
-    else alert(`Error al eliminar el dispositivo: ${response}`);
-    
-
-  };
+  
+  const {eliminarDatos, NavigateHome} = useDelete("computer")
 
   return (
     <>

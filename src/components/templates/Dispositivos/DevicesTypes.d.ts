@@ -9,6 +9,7 @@ export interface DevicesAddState {
     departamentoId: any
     estado: string
     fecha: string
+    nombre_windows: string
     data: Array< ()=> void >
 }
 
@@ -21,6 +22,7 @@ export interface DevicesEditState {
     cod_inventario: string
     bienes_nacionales: number
     propietario_equipo: string
+    nombre_windows: string
     departamentoId: any
     estado: string
     fecha_modificacion: string

@@ -26,7 +26,7 @@ export const HomeDepartamento = () => {
   const Reporte = async () => {
     setMsg("Generando reporte...");
     try {
-      const response = await api.get(`/departamento/reporte?filter=${search}`, { responseType: 'blob' });
+      const response = await api.get(`/departamentos/reporte?filter=${search}`, { responseType: 'blob' });
       const blob = new Blob([response.data], { type: 'application/pdf' });
       saveAs(blob, 'Departamentos.pdf');
       setMsg("Descarga exitosa");
@@ -47,7 +47,7 @@ export const HomeDepartamento = () => {
       // setProgress(prevState => {
       //   return {...prevState, started: true}
       // })
-      api.post('/departamento/importar-excel', formData,  {
+      api.post('/departamentos/importar-excel', formData,  {
         // onUploadProgress: (progressEvent) => {setProgress(prevState => {
         //     return {...prevState, bar: progressEvent.progress*100}
         //   })},
@@ -64,7 +64,7 @@ export const HomeDepartamento = () => {
   const ExportarExcel = async () => {
     setMsg("Generando excel...");
     try {
-      const response = await api.get(`/departamento/exportar-excel?filter=${search}`, { responseType: 'blob' });
+      const response = await api.get(`/departamentos/exportar-excel?filter=${search}`, { responseType: 'blob' });
       const blob = new Blob([response.data], { type: 'application/xlsx' });
       saveAs(blob, 'Departamentos.xlsx');
       setMsg("Descarga exitosa");
@@ -93,7 +93,7 @@ export const HomeDepartamento = () => {
       {/* { progress.started && <progress max="100" value={progress.bar}></progress> } */}
       { msg && <span style={{color:"red"}}>{msg}</span> }
       <br />
-      <Table APIPath='departamento' APINames= {Datos} EditarDatos={'editarDepartamento'} EliminarDatos={'eliminarDepartamento'} searchData={search} Header={Headers}/>
+      <Table APIPath='departamentos' APINames= {Datos} EditarDatos={'editarDepartamento'} EliminarDatos={'eliminarDepartamento'} searchData={search} Header={Headers}/>
       <br />
       <BtnAction btncolor='success' action={Reporte} btnlabel='Generar reporte'/>
       <BtnAction btncolor='success' action={ExportarExcel} btnlabel='Exportar a excel'/> 

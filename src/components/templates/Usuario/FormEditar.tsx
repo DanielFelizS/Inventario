@@ -1,9 +1,10 @@
 import {
   useState, useEffect,
   Form, BtnAction,
-  FormInput, api,useNavigate, useParams } from '../Dependencies.js';
+  FormInput, api, useParams } from '../Dependencies.js';
 import { CerrarProps } from "../../../types.js";
 import { UserEditState } from "./UserTypes.js";
+import usePut from '../../utils/CustomHooks/usePut.js';
 
 export const UserEdit = ({ btnCerrar }: CerrarProps) => {
   const [edit, setEdit] = useState<UserEditState>({
@@ -15,7 +16,9 @@ export const UserEdit = ({ btnCerrar }: CerrarProps) => {
   });
   const [error, setError] = useState("");
   const { id } = useParams();
-  const navigate = useNavigate();
+
+  const {msg, editarDatos} = usePut({ url: `usuarios`, PropEdit: edit})
+
 
   useEffect(() => {
     obtenerDatos();
@@ -39,23 +42,7 @@ export const UserEdit = ({ btnCerrar }: CerrarProps) => {
     }));
   };
 
-  const editarDatos = async () => {
-    try {
-      if (!edit.id) {
-        setError("El ID del usuario es requerido");
-      }
-
-      const response = await api.put(`/usuarios/${edit.id}`, edit);
-      // console.log(response.data);
-      alert(response.data);
-      btnCerrar();
-      navigate("/usuarios");
-    }
-    catch (error) {
-      setError("Ocurrió un error al editar el usuario");
-      console.error(error);
-    }
-  };
+  
 
   return (
     <>
@@ -105,6 +92,7 @@ export const UserEdit = ({ btnCerrar }: CerrarProps) => {
         </Form.Group>
       </Form>
       
+      { msg && <span style={{color: "green"}}>{msg}</span> }
       { error && <span style={{color: "red"}}>{error}</span> }
     </>
   );

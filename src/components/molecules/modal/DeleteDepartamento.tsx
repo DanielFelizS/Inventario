@@ -18,27 +18,27 @@ export const DeleteDepartamento = ({ Navegar, Delete }: DeleteModalProps) => {
           <Paragraph
             TextParagraph="Id del departamento: "
             ValueParagraph="id"
-            APIUrl={"departamento"}
+            APIUrl={"departamentos"}
           />
           <Paragraph
             TextParagraph="Nombre del departamento: "
             ValueParagraph="nombre"
-            APIUrl={"departamento"}
+            APIUrl={"departamentos"}
           />
           <Paragraph
             TextParagraph="Descripción (Objetivo del departamento): "
             ValueParagraph="descripción"
-            APIUrl={"departamento"}
+            APIUrl={"departamentos"}
           />
           <Paragraph
             TextParagraph="Fecha de creación: "
             ValueParagraph="fecha_creacion"
-            APIUrl={"departamento"}
+            APIUrl={"departamentos"}
           />
           <Paragraph
             TextParagraph="Encargado del departamento: "
             ValueParagraph="encargado"
-            APIUrl={"departamento"}
+            APIUrl={"departamentos"}
           />
         </Modal.Body>
         <Modal.Footer>

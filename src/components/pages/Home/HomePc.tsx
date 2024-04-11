@@ -74,9 +74,9 @@ export default function HomeComputer () {
     }
   }
 
-  const Datos = ['id', 'nombre_equipo', 'ram', 'disco_duro', 'procesador', 'ventilador', 'fuentePoder', 'motherBoard', 'tipo_MotherBoard'];
+  const Datos = ['id', 'serial_no', 'ram', 'disco_duro', 'procesador', 'ventilador', 'fuentePoder', 'motherBoard', 'tipo_MotherBoard'];
 
-  const Headers = ['ID', 'Equipo', 'RAM', 'Disco duro', 'Procesador', 'Ventilador', 'Fuente de poder', 'Motherboard', 'Tipo de motherboard'];
+  const Headers = ['ID', 'No. serie del equipo', 'RAM', 'Disco duro', 'Procesador', 'Ventilador', 'Fuente de poder', 'Motherboard', 'Tipo de motherboard'];
 
   return (
     <>

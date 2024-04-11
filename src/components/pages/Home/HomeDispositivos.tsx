@@ -74,9 +74,9 @@ export const HomeDispositivos = () => {
   const handleNavigate = () => {
     navigate("/agregarDispositivo");
   };
-  const Datos = ['id', 'nombre_equipo', 'marca', 'modelo', 'estado', 'serial_no', 'cod_inventario', 'bienes_nacionales', 'fecha_modificacion', 'propietario_equipo', 'nombre_departamento'];
+  const Datos = ['id', 'nombre_equipo', 'marca', 'modelo', 'estado', 'serial_no', 'cod_inventario', 'bienes_nacionales', 'fecha_modificacion', 'propietario_equipo', 'nombre_windows' , 'nombre_departamento'];
 
-  const Headers = ['ID', 'Equipo', 'Marca', 'Modelo', 'Estado', 'Serial no.', 'INVI', 'Bienes nacionales', 'Fecha de modificación', 'Propietario del equipo', 'Departamento'];
+  const Headers = ['ID', 'Equipo', 'Marca', 'Modelo', 'Estado', 'Serial no.', 'INVI', 'Bienes nacionales', 'Fecha de modificación', 'Propietario del equipo', 'Nombre (usuario windows)','Departamento'];
 
   return (
     <>

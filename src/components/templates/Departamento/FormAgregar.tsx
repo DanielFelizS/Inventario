@@ -1,9 +1,10 @@
 import {
   useState,
   Form, BtnAction,
-  FormInput, api,useNavigate } from '../Dependencies.js';
+  FormInput } from '../Dependencies.js';
 import { NavegarProps } from '../../../types.js';
 import { DepartamentAddState } from './DepartmentTypes.js';
+import usePost from '../../utils/CustomHooks/usePost.js';
 
 export const DepartmentAdd = ({ Navegar }: NavegarProps) => {
   const [nombreDepartamento, setNombreDepartamento] = useState<DepartamentAddState["nombre"]>("");
@@ -11,30 +12,18 @@ export const DepartmentAdd = ({ Navegar }: NavegarProps) => {
   const [fecha, setFecha] = useState<DepartamentAddState["fecha_creacion"]>("");
   const [encargado, setEncargado] = useState<DepartamentAddState["encargado"]>("");
   const [data, setData] = useState<DepartamentAddState["departamentoData"]>([]);
-  const [error, setError] = useState("");
 
-  const agregarDatos = async () => {
+  const { msg, agregarDatos } = usePost("departamento");
+
+
+  const handleAgregarDatos = async () => {
     const postData = {
       nombre: nombreDepartamento,
       descripción: descripcion,
       fecha_creacion: fecha,
       encargado: encargado,
     };
-
-    try {
-      const response = await api.post("/departamento", postData);
-      setData([...data, response.data]);
-      alert("Los datos se han agregado correctamente");
-      handleNavigate();
-    } catch (error) {
-      setError("Error al agregar los datos");
-      console.error(error);
-    }
-  };
-
-  const navigate = useNavigate();
-  const handleNavigate = () => {
-    navigate("/departamentos");
+    agregarDatos(postData);
   };
 
   return (
@@ -76,10 +65,10 @@ export const DepartmentAdd = ({ Navegar }: NavegarProps) => {
         <BtnAction
           btnlabel="Guardar"
           btncolor="success"
-          action={agregarDatos}
+          action={handleAgregarDatos}
         />
       </Form>
-      { error && <span style={{color: "red"}}>{error}</span> }
+      { msg && <span style={{color: "red"}}>{msg}</span> }
     </>
   );
 };

@@ -1,9 +1,10 @@
 import {
   useState, useEffect,
   Form, BtnAction,
-  FormInput, api,useNavigate, useParams } from '../Dependencies.js';
+  FormInput, api, useParams } from '../Dependencies.js';
 import { DepartamentEditState } from "./DepartmentTypes";
 import { CerrarProps } from "../../../types.js";
+import usePut from '../../utils/CustomHooks/usePut.js';
 
 export const DepartmentEdit = ({ btnCerrar }: CerrarProps) => {
   const [edit, setEdit] = useState<DepartamentEditState>({
@@ -15,7 +16,7 @@ export const DepartmentEdit = ({ btnCerrar }: CerrarProps) => {
   });
   const [error, setError] = useState("");
   const { id } = useParams();
-  const navigate = useNavigate();
+  const {msg, editarDatos} = usePut({ url: `departamentos/${id}`, PropEdit: edit})
   
   useEffect(() => {
     obtenerDatos();
@@ -23,8 +24,12 @@ export const DepartmentEdit = ({ btnCerrar }: CerrarProps) => {
 
   const obtenerDatos = async () => {
     try {
-      const response = await api.get(`/departamento/${id}`);
-      setEdit(response.data);
+      const response = await api.get(`/departamentos/${id}`);
+      const fechaCreacion = response.data.fecha_creacion.substring(0, 10); 
+      setEdit({
+      ...response.data,
+      fecha_creacion: fechaCreacion,
+    })
     } catch (error) {
       setError("Error al obtener los datos del departamento");
       console.error(error);
@@ -39,23 +44,6 @@ export const DepartmentEdit = ({ btnCerrar }: CerrarProps) => {
     }));
   };
 
-  const editarDatos = async () => {
-    try {
-      if (!edit.id) {
-        setError("El ID del dispositivo es requerido");
-        console.log(error);
-      }
-
-      const response = await api.put(`/departamento/${edit.id}`, edit);
-      // console.log(response.data);
-      alert(response.data);
-      btnCerrar();
-      navigate("/departamentos");
-    } catch (error) {
-      setError("Ocurrió un error al editar el departamento");
-      console.log(error);
-    }
-  };
 
   return (
     <>
@@ -105,6 +93,7 @@ export const DepartmentEdit = ({ btnCerrar }: CerrarProps) => {
           />
         </Form.Group>
       </Form>
+      { msg && <span style={{color: "green"}}>{msg}</span> }
       { error && <span style={{color: "red"}}>{error}</span> }
 
     </>
