@@ -72,7 +72,6 @@ export const DevicesAdd = ({ Navegar }: NavegarProps) => {
             SecondPlaceholder="Optiplex 3000"
             SecondName="modelo"
           />
-
           <FormInput
             InputTitle="Número de serie (Service Tag)"
             InputType="text"
@@ -80,7 +79,6 @@ export const DevicesAdd = ({ Navegar }: NavegarProps) => {
             Inputvalue={noSerie}
             InputChange={(e) => setNoSerie(e.target.value)}
           />
-
           <InputDoble
             InputName="Código de inventario y Bienes nacionales"
             FirstValue={inventario}
@@ -119,9 +117,7 @@ export const DevicesAdd = ({ Navegar }: NavegarProps) => {
               </option>
             ))}
           </select>
-
           <br />
-
           {/* Estado del equipo */}
           <SelectForm
             Inputvalue={estado}

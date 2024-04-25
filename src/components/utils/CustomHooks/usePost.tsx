@@ -17,7 +17,6 @@ export default function usePost(url: string) {
             setData([...data, response.data]);
             setMsg(`Los datos se han agregado correctamente`);
             handleNavigate()
-            
         } catch (error) {
             setMsg(`No se pudieron agregar los datos a la entidad ${url}`);
             console.error(error);
